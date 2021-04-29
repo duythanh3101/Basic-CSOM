@@ -2,15 +2,16 @@
 using Microsoft.SharePoint.Client;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Basic_CSOM.Entities.ContentTypes
 {
     public class EmployeeContentTypeTemplate : BaseContentType
     {
         public EmployeeContentTypeTemplate(ClientContext context) : base(context)
+        {
+        }
+
+        public override void CreateContentTypeTemplate(ClientContext context)
         {
             Name = "EmployeeTestList";
             Fields = new List<BaseField>()
@@ -44,7 +45,5 @@ namespace Basic_CSOM.Entities.ContentTypes
             };
             CreateFieldList();
         }
-
-
     }
 }

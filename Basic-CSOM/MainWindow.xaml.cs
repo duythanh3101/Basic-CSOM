@@ -17,7 +17,7 @@ namespace Basic_CSOM
     {
         string url = "https://m365b326364.sharepoint.com/sites/testcsom";
         string user = "admin@m365b326364.onmicrosoft.com";
-        SecureString password = UtilApp.GetSecureString("");
+        SecureString password = UtilApp.GetSecureString("Fgakdhsj123");
 
         public MainWindow()
         {
@@ -38,7 +38,7 @@ namespace Basic_CSOM
                 //context.ExecuteQuery();
                 //Console.WriteLine($"Title: {web.Title}");
 
-                var a = new EmployeeContentTypeTemplate(context);
+                var a = new ProjectContentTypeTemplate(context);
                 a.Create();
 
                 //var a = new NewSiteColumn(context);

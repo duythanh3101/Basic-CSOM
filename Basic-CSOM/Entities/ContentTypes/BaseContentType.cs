@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace Basic_CSOM.Entities.ContentTypes
 {
-    public class BaseContentType : IDisposable
+    public abstract class BaseContentType : IDisposable
     {
         public List<BaseField> Fields { get; set; }
         public string Name { get; set; }
@@ -18,16 +18,7 @@ namespace Basic_CSOM.Entities.ContentTypes
         public BaseContentType(ClientContext context)
         {
             this.context = context;
-        }
-
-        public BaseContentType(ClientContext context, List<BaseField> fields, string name, string description, string group, string parentType)
-        {
-            this.Fields = fields;
-            this.Name = name;
-            this.Description = description;
-            this.Group = group;
-            this.ParentType = parentType;
-            this.context = context;
+            CreateContentTypeTemplate(context);
         }
 
         public ContentType Create()
@@ -110,5 +101,7 @@ namespace Basic_CSOM.Entities.ContentTypes
         {
             context.Dispose();
         }
+
+        public abstract void CreateContentTypeTemplate(ClientContext context);
     }
 }

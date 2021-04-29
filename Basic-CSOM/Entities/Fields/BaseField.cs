@@ -15,22 +15,6 @@ namespace Basic_CSOM.Entities
 
         public Field CurrentField { get; set; }
 
-        public BaseField(ClientContext context, string internalName, string displayName, string description, string schemaXml)
-        {
-            this.Context = context;
-            this.InternalName = internalName;
-            this.DisplayName = displayName;
-            this.Description = description;
-            this.SchemaXml = schemaXml;
-        }
-
-        public BaseField(ClientContext context, string internalName)
-        {
-            Context = context;
-            InternalName = internalName;
-            //CurrentField = Create();
-        }
-
         public BaseField(ClientContext context)
         {
             Context = context;
