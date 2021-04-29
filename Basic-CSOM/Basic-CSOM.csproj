@@ -97,7 +97,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Entities\BaseField.cs" />
+    <Compile Include="Entities\ContentTypes\BaseContentType.cs" />
+    <Compile Include="Entities\ContentTypes\EmployeeContentTypeTemplate.cs" />
+    <Compile Include="Entities\Fields\BaseField.cs" />
+    <Compile Include="Entities\Fields\ExistSiteColumn.cs" />
+    <Compile Include="Entities\Fields\NewSiteColumn.cs" />
+    <Compile Include="Entities\Lists\BaseList.cs" />
     <Compile Include="Utils\UtilApp.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -141,6 +146,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Seed\" />
     <Folder Include="Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
