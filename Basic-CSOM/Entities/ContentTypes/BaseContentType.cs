@@ -45,7 +45,6 @@ namespace Basic_CSOM.Entities.ContentTypes
                 targetContentType = cntTypeList.Add(newCntType);
 
                 LoadSiteColumn(targetContentType);
-
                 context.Load(targetContentType);
                 context.ExecuteQuery();
             }

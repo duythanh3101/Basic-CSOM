@@ -38,7 +38,7 @@ namespace Basic_CSOM
                 //context.ExecuteQuery();
                 //Console.WriteLine($"Title: {web.Title}");
 
-                var a = new ProjectContentTypeTemplate(context);
+                var a = new ProjectDocumentContentTypeTemplate(context);
                 a.Create();
 
                 //var a = new NewSiteColumn(context);

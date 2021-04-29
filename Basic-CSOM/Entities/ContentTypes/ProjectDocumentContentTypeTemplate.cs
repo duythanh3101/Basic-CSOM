@@ -1,4 +1,5 @@
-﻿using Microsoft.SharePoint.Client;
+﻿using Basic_CSOM.Entities.Fields;
+using Microsoft.SharePoint.Client;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,29 @@ namespace Basic_CSOM.Entities.ContentTypes
 
         public override void CreateContentTypeTemplate(ClientContext context)
         {
-            throw new NotImplementedException();
+            Name = "Project Document";
+            ParentType = "Document";
+            Fields = new List<BaseField>()
+            {
+                new NewSiteColumn(context)
+                {
+                    InternalName = "DocDescription",
+                    DisplayName = "Description",
+                    SchemaXml = $"<Field ID='{Guid.NewGuid()}' Type='Note' Name='DocDescription' StaticName='DocDescription' DisplayName='Description' NumLines='6' RichText='FALSE' Sortable='FALSE' />"
+                },
+                new NewSiteColumn(context)
+                {
+                    InternalName = "DocType",
+                    DisplayName = "Document Type",
+                    SchemaXml = $"<Field ID='{Guid.NewGuid()}' Type='Choice' Name='DocType' StaticName='DocType' DisplayName='Document Type' Format='Dropdown'><CHOICES>" +
+                                "<CHOICE>Business requirement</CHOICE>" +
+                                "<CHOICE>Technical document</CHOICE>" +
+                                "<CHOICE>User guide</CHOICE>" +
+                                "</CHOICES></Field>"
+                }
+            };
+            CreateFieldList();
+
         }
     }
 }

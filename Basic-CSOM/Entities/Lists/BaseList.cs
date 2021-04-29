@@ -12,5 +12,10 @@ namespace Basic_CSOM.Entities.Lists
         {
             this.Context = context;
         }
+
+        public void GenerateList()
+        {
+
+        }
     }
 }
