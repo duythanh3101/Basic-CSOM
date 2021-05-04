@@ -7,6 +7,7 @@ using Basic_CSOM.Utils;
 using Basic_CSOM.Entities;
 using Basic_CSOM.Entities.ContentTypes;
 using Basic_CSOM.Entities.Fields;
+using Basic_CSOM.Entities.Lists;
 
 namespace Basic_CSOM
 {
@@ -17,7 +18,7 @@ namespace Basic_CSOM
     {
         string url = "https://m365b326364.sharepoint.com/sites/testcsom";
         string user = "admin@m365b326364.onmicrosoft.com";
-        SecureString password = UtilApp.GetSecureString("Fgakdhsj123");
+        SecureString password = UtilApp.GetSecureString("");
 
         public MainWindow()
         {
@@ -38,13 +39,20 @@ namespace Basic_CSOM
                 //context.ExecuteQuery();
                 //Console.WriteLine($"Title: {web.Title}");
 
-                var a = new ProjectDocumentContentTypeTemplate(context);
-                a.Create();
+                //var a = new ProjectDocumentContentTypeTemplate(context);
+                //a.Create();
 
                 //var a = new NewSiteColumn(context);
                 //a.SchemaXml = $"<Field ID='{Guid.NewGuid()}' Type='Text' Name='Field123' StaticName='Field123' DisplayName='Test Field 2' />";
                 //a.InternalName = "Field123";
                 //a.Create();
+
+                var list = new BaseList(context)
+                {
+                    Title = "Student List",
+                    ContentTypeName = "EmployeeTestList"
+                };
+                list.Generate();
             }
         }
 

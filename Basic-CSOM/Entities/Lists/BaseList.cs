@@ -1,11 +1,20 @@
 ﻿using Microsoft.SharePoint.Client;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Basic_CSOM.Entities.Lists
 {
     public class BaseList
     {
         public string Name { get; set; }
+        public string Title { get; set; }
+        public string ContentTypeName { get; set; }
+        public int TemplateType { get; set; } = (int)ListTemplateType.GenericList;
+        public string ViewTitle { get; set; } = "All Items";
+        public List<string> ColumnForDefaultView { get; set; }
+        public List<BaseField> ColumnFields { get; set; }
 
+        public string Description { get; set; } = "New Description";
         protected ClientContext Context;
 
         public BaseList(ClientContext context)
@@ -13,8 +22,84 @@ namespace Basic_CSOM.Entities.Lists
             this.Context = context;
         }
 
-        public void GenerateList()
+        public List Generate()
         {
+            // Get content type collection
+            Web web = Context.Web;
+            var contentTypes = Context.Web.ContentTypes;
+            Context.Load(contentTypes);
+
+            // Create new list information
+            ListCreationInformation creationInfo = new ListCreationInformation
+            {
+                Title = Title,
+                Description = Description,
+                TemplateType = TemplateType
+            };
+            List newList = web.Lists.Add(creationInfo);
+            Context.Load(newList, li => li.ContentTypes);
+            Context.ExecuteQuery();
+
+            // Get content type before importing to list
+            var contentType = GetContentType(contentTypes, ContentTypeName);
+            if (contentType == null)
+            {
+                return null;
+            }
+            newList.ContentTypesEnabled = true;
+            newList.ContentTypes.AddExistingContentType(contentType);
+            newList.Update();
+            Context.ExecuteQuery();
+
+            //AddView(newList);
+            //AddCustomColum(newList);
+            Context.ExecuteQuery();
+
+            return newList;
+        }
+
+        private ContentType GetContentType(ContentTypeCollection contentTypes ,string contentTypeName)
+        {
+            ContentType content = null;
+            if (contentTypes == null || contentTypes.Count <= 0 || string.IsNullOrEmpty(contentTypeName))
+            {
+                return content;
+            }
+
+            return contentTypes.FirstOrDefault(x => x.Name.Equals(contentTypeName));
+        }
+
+        public void Delete()
+        {
+            // The SharePoint web at the URL.
+            Web web = Context.Web;
+
+            List list = web.Lists.GetByTitle(Title);
+            list.DeleteObject();
+
+            Context.ExecuteQuery();
+        }
+
+        public void AddFiled(List list, BaseField baseField)
+        {
+            if (list != null)
+            {
+                Field field = list.Fields.Add(baseField.CurrentField);
+
+                Context.ExecuteQuery();
+            }
+        }
+
+        public void AddFiledAsXml(List list, BaseField baseField)
+        {
+            if (list != null)
+            {
+                Field field = list.Fields.AddFieldAsXml(baseField.SchemaXml,
+                                           true,
+                                           AddFieldOptions.DefaultValue);
+
+                Context.ExecuteQuery();
+            }
 
         }
     }

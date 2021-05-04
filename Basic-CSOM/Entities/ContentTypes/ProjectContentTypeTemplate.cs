@@ -44,9 +44,9 @@ namespace Basic_CSOM.Entities.ContentTypes
                 {
                     InternalName = "StartDate"
                 },
-                new ExistSiteColumn(context) 
-                { 
-                    InternalName = "_EndDate" 
+                new ExistSiteColumn(context)
+                {
+                    InternalName = "_EndDate"
                 }
             };
             CreateFieldList();
