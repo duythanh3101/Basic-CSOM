@@ -1,17 +1,17 @@
 ﻿using Microsoft.SharePoint.Client;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace Basic_CSOM.Entities.Lists
 {
-    public class BaseList
+    public abstract class BaseList
     {
-        public string Name { get; set; }
         public string Title { get; set; }
         public string ContentTypeName { get; set; }
         public int TemplateType { get; set; } = (int)ListTemplateType.GenericList;
         public string ViewTitle { get; set; } = "All Items";
-        public List<string> ColumnForDefaultView { get; set; }
+        public List<string> ShowColumns { get; set; }
         public List<BaseField> ColumnFields { get; set; }
 
         public string Description { get; set; } = "New Description";
@@ -49,13 +49,35 @@ namespace Basic_CSOM.Entities.Lists
             newList.ContentTypesEnabled = true;
             newList.ContentTypes.AddExistingContentType(contentType);
             newList.Update();
-            Context.ExecuteQuery();
+            //Context.ExecuteQuery();
 
-            //AddView(newList);
-            //AddCustomColum(newList);
+            UpdateListitemLookup(newList, web.Lists);
+            LoadView(newList);
             Context.ExecuteQuery();
 
             return newList;
+        }
+
+        public virtual void UpdateListitemLookup(List list, ListCollection webListCollection) { }
+
+        private void LoadView(List list)
+        {
+            Context.Load(list.Fields);
+
+            // Get required view by specifying view Title here
+            var targetView = list.Views.GetByTitle(ViewTitle);
+            Context.Load(targetView, x => x.ViewFields);
+            Context.ExecuteQuery();
+
+            // Get all columns need to show
+            var fields = list.Fields.Where(x => ShowColumns.Contains(x.InternalName)).ToList();
+
+            // Loop for each site column and add to view
+            foreach (var item in fields)
+            {
+                targetView.ViewFields.Add(item.InternalName);
+            }
+            targetView.Update();
         }
 
         private ContentType GetContentType(ContentTypeCollection contentTypes ,string contentTypeName)

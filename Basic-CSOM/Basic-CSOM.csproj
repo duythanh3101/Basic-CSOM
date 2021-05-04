@@ -105,6 +105,9 @@
     <Compile Include="Entities\Fields\ExistSiteColumn.cs" />
     <Compile Include="Entities\Fields\NewSiteColumn.cs" />
     <Compile Include="Entities\Lists\BaseList.cs" />
+    <Compile Include="Entities\Lists\DocProjectList.cs" />
+    <Compile Include="Entities\Lists\EmployeeList.cs" />
+    <Compile Include="Entities\Lists\ProjectList.cs" />
     <Compile Include="Entities\Sites\BaseSite.cs" />
     <Compile Include="Enums\TypeSharepointEnum.cs" />
     <Compile Include="Utils\UtilApp.cs" />
