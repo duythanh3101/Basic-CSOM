@@ -1,4 +1,5 @@
 ﻿using Microsoft.SharePoint.Client;
+using System;
 using System.Collections.Generic;
 
 namespace Basic_CSOM.Entities.Lists
@@ -6,6 +7,7 @@ namespace Basic_CSOM.Entities.Lists
     public class DocProjectList : BaseList
     {
         private ClientContext context;
+        private string DependListTitle = "ProjectList";
 
         public DocProjectList(ClientContext context) : base(context)
         {
@@ -21,31 +23,25 @@ namespace Basic_CSOM.Entities.Lists
             };
         }
 
-        public override void UpdateListitemLookup(List list, ListCollection webListCollection)
+        public override void UpdateListitemLookup(List targetList, ListCollection webListCollection)
         {
-            FieldCollection fields = list.Fields;
-            context.Load(list, l => l.Id);
+            var relatedList = webListCollection.GetByTitle(DependListTitle);
+            if (relatedList == null)
+            {
+                return;
+            }
+            var fields = targetList.Fields;
 
-            CamlQuery camlQueryForItem = new CamlQuery();
-            camlQueryForItem.ViewXml = @"<View>
-                                            <Query>
-                                                <Where>
-                                                    <Eq>
-                                                        <FieldRef Name='ID'/>
-                                                        <Value Type='Counter'>6</Value>
-                                                    </Eq>
-                                                </Where>
-                                            </Query>
-                                        </View>";
-            ListItemCollection listItems = list.GetItems(camlQueryForItem);
-            context.Load(listItems);
+            context.Load(relatedList);
             context.ExecuteQuery();
-            ListItem itemToUpdate = listItems[0];
-            FieldLookupValue lv = itemToUpdate["wlookup"] as FieldLookupValue;
-            lv.LookupId = 16;
-            itemToUpdate["wlookup"] = lv;
-            itemToUpdate.Update();
-            context.Load(itemToUpdate);
+
+            string schema = $"<Field ID='{Guid.NewGuid()}' Type='Lookup' Name='{DependListTitle}' StaticName='Project' DisplayName='Project' List='{relatedList.Id}' ShowField='ProjectName' />";
+            Field newField = fields.AddFieldAsXml(schema, true, AddFieldOptions.AddFieldInternalNameHint);
+            newField.SetShowInEditForm(true);
+            newField.SetShowInNewForm(true);
+            context.Load(newField);
+
+            context.Load(fields);
             context.ExecuteQuery();
         }
     }
