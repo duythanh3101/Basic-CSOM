@@ -30,7 +30,6 @@ namespace Basic_CSOM
 
             Load();
             MainFrame.Content = new ContentTypeCreatorPage(context);
-            DeactivateAllScreen();
         }
 
         public void Load()
@@ -67,13 +66,13 @@ namespace Basic_CSOM
       
         private void ContentTypeButton_Clicked(object sender, RoutedEventArgs e)
         {
-
+            MainFrame.Content = new ContentTypeCreatorPage(context);
         }
 
        
         private void EmployeeListButton_Clicked(object sender, RoutedEventArgs e)
         {
-
+            MainFrame.Content = new EmployeeListPage(context);
         }
 
         private void ProjectListButton_Clicked(object sender, RoutedEventArgs e)
@@ -84,13 +83,6 @@ namespace Basic_CSOM
         private void ProjectDocListButton_Clicked(object sender, RoutedEventArgs e)
         {
 
-        }
-        public void DeactivateAllScreen()
-        {
-            //BlockChainScreen.Visibility = Visibility.Collapsed;
-            //CreateTransactionScreen.Visibility = Visibility.Collapsed;
-            //PendingTransactionsScreen.Visibility = Visibility.Collapsed;
-            //SettingsScreen.Visibility = Visibility.Collapsed;
         }
 
         private void ListButton_Clicked(object sender, RoutedEventArgs e)

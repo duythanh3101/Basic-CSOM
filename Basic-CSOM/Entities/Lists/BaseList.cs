@@ -16,7 +16,7 @@ namespace Basic_CSOM.Entities.Lists
 
         public string Description { get; set; } = "New Description";
 
-        private List currentList;
+        protected List currentList;
         protected ClientContext Context;
 
         public BaseList(ClientContext context)

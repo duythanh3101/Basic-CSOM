@@ -15,6 +15,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using List = Microsoft.SharePoint.Client.List;
+using ListItemCollection = Microsoft.SharePoint.Client.ListItemCollection;
 
 namespace Basic_CSOM.Pages
 {
@@ -24,6 +26,7 @@ namespace Basic_CSOM.Pages
     public partial class ListCreatorPage : Page
     {
         private ClientContext context;
+        private List currentList;
 
         public ListCreatorPage()
         {
@@ -43,46 +46,35 @@ namespace Basic_CSOM.Pages
         private void EmployeeList_OnClick(object sender, RoutedEventArgs e)
         {
             string name = EmployeeListName.Text.ToString().Trim();
+            CreateList<EmployeeList>(name);
+        }
+
+        private void ProjectList_OnClick(object sender, RoutedEventArgs e)
+        {
+            string name = ProjectListName.Text.ToString().Trim();
+            CreateList<ProjectList>(name);
+        }
+
+        private void ProjectDocList_OnClick(object sender, RoutedEventArgs e)
+        {
+            string name = ProjectDocListName.Text.ToString().Trim();
+            CreateList<DocProjectList>(name);
+        }
+
+        private void CreateList<T>(string name) where T: BaseList
+        {
             if (UtilApp.IsExist(context, name, Enums.TypeSharepointEnum.List))
             {
                 MessageBox.Show("List is existed. Please change the another name", "Notification", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             else
             {
-                var template = new EmployeeList(context)
-                {
-                    Title = name
-                };
-                template.Generate();
+                var instance = (BaseList)Activator.CreateInstance(typeof(T), context);
+                instance.Title = name;
+
+                currentList = instance.Generate();
                 MessageBox.Show("List is created successfully", "Notification", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
-
-        private void ProjectList_OnClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void ProjectDocList_OnClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        //private void CreateList<BaseList>(string name)
-        //{
-        //    if (UtilApp.IsExist(context, name, Enums.TypeSharepointEnum.List))
-        //    {
-        //        MessageBox.Show("List is existed. Please change the another name", "Notification", MessageBoxButton.OK, MessageBoxImage.Information);
-        //    }
-        //    else
-        //    {
-        //        var template = new BaseList(context)
-        //        {
-        //            Title = name
-        //        };
-        //        template.Generate();
-        //        MessageBox.Show("List is created successfully", "Notification", MessageBoxButton.OK, MessageBoxImage.Information);
-        //    }
-        //}
     }
 }

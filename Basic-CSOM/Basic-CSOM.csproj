@@ -108,10 +108,14 @@
     <Compile Include="Entities\Lists\DocProjectList.cs" />
     <Compile Include="Entities\Lists\EmployeeList.cs" />
     <Compile Include="Entities\Lists\ProjectList.cs" />
+    <Compile Include="Entities\Models\Employee.cs" />
     <Compile Include="Entities\Sites\BaseSite.cs" />
     <Compile Include="Enums\TypeSharepointEnum.cs" />
     <Compile Include="Pages\ContentTypeCreatorPage.xaml.cs">
       <DependentUpon>ContentTypeCreatorPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\EmployeeListPage.xaml.cs">
+      <DependentUpon>EmployeeListPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\ListCreatorPage.xaml.cs">
       <DependentUpon>ListCreatorPage.xaml</DependentUpon>
@@ -132,6 +136,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Pages\ContentTypeCreatorPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\EmployeeListPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

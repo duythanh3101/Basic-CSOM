@@ -14,8 +14,9 @@ namespace Basic_CSOM.Entities.Lists
             //Title = "EmployeeList";
             ShowColumns = new List<string>()
             {
+                "FirstName",
+                "ProgrammingLanguages",
                 "ShortDesc",
-                ""
             };
             ContentTypeName = "EmployeeTestList";
 
