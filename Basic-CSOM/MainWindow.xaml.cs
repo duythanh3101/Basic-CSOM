@@ -8,6 +8,9 @@ using Basic_CSOM.Entities;
 using Basic_CSOM.Entities.ContentTypes;
 using Basic_CSOM.Entities.Fields;
 using Basic_CSOM.Entities.Lists;
+using System.Collections.Generic;
+using Basic_CSOM.Services;
+using Basic_CSOM.Pages;
 
 namespace Basic_CSOM
 {
@@ -19,18 +22,22 @@ namespace Basic_CSOM
         string url = "https://m365b326364.sharepoint.com/sites/testcsom";
         string user = "admin@m365b326364.onmicrosoft.com";
         SecureString password = UtilApp.GetSecureString("");
+        private ClientContext context;
 
         public MainWindow()
         {
             InitializeComponent();
+
             Load();
+            MainFrame.Content = new ContentTypeCreatorPage(context);
+            DeactivateAllScreen();
         }
 
         public void Load()
         {
             Uri site = new Uri(url);
 
-            using (var context = AuthenticationManager.CreateClientContext(url, user, password))
+            context = AuthenticationManager.CreateClientContext(url, user, password);
             {
                 var web = context.Web;
                 context.Load(web, w => w.Title, w => w.Description);
@@ -39,7 +46,7 @@ namespace Basic_CSOM
                 //context.ExecuteQuery();
                 //Console.WriteLine($"Title: {web.Title}");
 
-                //var a = new ProjectDocumentContentTypeTemplate(context);
+                //var a = new ProjectContentTypeTemplate(context);
                 //a.Create();
 
                 //var a = new NewSiteColumn(context);
@@ -47,16 +54,48 @@ namespace Basic_CSOM
                 //a.InternalName = "Field123";
                 //a.Create();
 
-                var list = new BaseList(context)
-                {
-                    Title = "Student List",
-                    ContentTypeName = "EmployeeTestList"
-                };
-                list.Generate();
+                //var list = new ProjectList(context);
+                //list.Generate();
+
+                //SiteHandler siteHandler = new SiteHandler(context);
+                //siteHandler.CreateHRSubsite();
             }
+
+           
         }
 
-
       
+        private void ContentTypeButton_Clicked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+       
+        private void EmployeeListButton_Clicked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ProjectListButton_Clicked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ProjectDocListButton_Clicked(object sender, RoutedEventArgs e)
+        {
+
+        }
+        public void DeactivateAllScreen()
+        {
+            //BlockChainScreen.Visibility = Visibility.Collapsed;
+            //CreateTransactionScreen.Visibility = Visibility.Collapsed;
+            //PendingTransactionsScreen.Visibility = Visibility.Collapsed;
+            //SettingsScreen.Visibility = Visibility.Collapsed;
+        }
+
+        private void ListButton_Clicked(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Content = new ListCreatorPage(context);
+        }
     }
 }

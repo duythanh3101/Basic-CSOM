@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace Basic_CSOM.Entities.Lists
 {
-    public abstract class BaseList
+    public class BaseList
     {
         public string Title { get; set; }
         public string ContentTypeName { get; set; }
@@ -15,6 +15,8 @@ namespace Basic_CSOM.Entities.Lists
         public List<BaseField> ColumnFields { get; set; }
 
         public string Description { get; set; } = "New Description";
+
+        private List currentList;
         protected ClientContext Context;
 
         public BaseList(ClientContext context)
@@ -123,6 +125,49 @@ namespace Basic_CSOM.Entities.Lists
                 Context.ExecuteQuery();
             }
 
+        }
+
+        public void UpdateItem(int id, string fieldName, string newValue)
+        {
+            if (currentList == null)
+            {
+                currentList = Context.Web.Lists.GetByTitle(ViewTitle);
+            }
+
+            ListItem item = currentList.GetItemById(id);
+            item[fieldName] = newValue;
+            item.Update();
+            Context.ExecuteQuery();
+        }
+
+        public void DeleteItem(int rowPos)
+        {
+            if (currentList == null)
+            {
+                currentList = Context.Web.Lists.GetByTitle(ViewTitle);
+            }
+
+            // Option 1: Get Item by ID
+            ListItem oItem = currentList.GetItemById(11);
+
+            // Option 2: Get Item using CAML Query
+            CamlQuery oQuery = new CamlQuery();
+            oQuery.ViewXml = $@"<View><Query><Where>
+                                <Eq>
+                                <FieldRef Name='{Title}' />
+                                <Value Type='Text'>New List Item</Value>
+                                </Eq>
+                                </Where></Query></View>";
+
+            ListItemCollection oItems = currentList.GetItems(oQuery);
+            Context.Load(oItems);
+            Context.ExecuteQuery();
+
+            oItem = oItems.FirstOrDefault();
+            // Option 2: Ends Here(Above line)
+
+            oItem.DeleteObject();
+            Context.ExecuteQuery();
         }
     }
 }

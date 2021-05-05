@@ -13,7 +13,7 @@ namespace Basic_CSOM.Entities.ContentTypes
 
         public override void CreateContentTypeTemplate(ClientContext context)
         {
-            Name = "EmployeeTestList";
+            //Name = "EmployeeTestList";
             Fields = new List<BaseField>()
             {
                 new ExistSiteColumn(context) { InternalName = "FirstName" },

@@ -1,0 +1,57 @@
+﻿<Page x:Class="Basic_CSOM.Pages.ContentTypeCreatorPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Basic_CSOM.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="ContentTypeCreateorPage">
+
+    <Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <GroupBox Header="Employee" Margin="10">
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="4*"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Margin="10 0 0 0" Width="200" Height="40" Content="Content Type Name: " FontSize="16"/>
+                    <TextBox Height="40" Grid.Column="1" VerticalContentAlignment="Center" Name="EmployeeContentTypeName"/>
+                    <Button Width="150" Height="40" Grid.Column="2" Content="Create Content Type" Click="EmployeeContentType_OnClick"/>
+                </Grid>
+            </GroupBox>
+            <GroupBox Header="Project" Margin="10" Grid.Row="1">
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="4*"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Margin="10 0 0 0" Width="200" Height="40" Content="Content Type Name: " FontSize="16"/>
+                    <TextBox Height="40" Grid.Column="1" VerticalContentAlignment="Center" Name="ProjectContentTypeName"/>
+                    <Button Width="150" Height="40" Grid.Column="2" Content="Create Content Type" Click="ProjectContentType_OnClick"/>
+                </Grid>
+            </GroupBox>
+            <GroupBox Header="Project Document" Margin="10" Grid.Row="2">
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="4*"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Margin="10 0 0 0" Width="200" Height="40" Content="Content Type Name: " FontSize="16"/>
+                    <TextBox Height="40" Grid.Column="1" VerticalContentAlignment="Center" Name="ProjectDocContentTypeName"/>
+                    <Button Width="150" Height="40" Grid.Column="2" Content="Create Content Type" Click="ProjectDocContentType_OnClick"/>
+                </Grid>
+            </GroupBox>
+
+        </Grid>
+    </Grid>
+</Page>

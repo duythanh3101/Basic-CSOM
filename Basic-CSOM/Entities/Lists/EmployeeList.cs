@@ -11,7 +11,7 @@ namespace Basic_CSOM.Entities.Lists
     {
         public EmployeeList(ClientContext context) : base(context)
         {
-            Title = "EmployeeList";
+            //Title = "EmployeeList";
             ShowColumns = new List<string>()
             {
                 "ShortDesc",

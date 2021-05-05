@@ -110,6 +110,12 @@
     <Compile Include="Entities\Lists\ProjectList.cs" />
     <Compile Include="Entities\Sites\BaseSite.cs" />
     <Compile Include="Enums\TypeSharepointEnum.cs" />
+    <Compile Include="Pages\ContentTypeCreatorPage.xaml.cs">
+      <DependentUpon>ContentTypeCreatorPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ListCreatorPage.xaml.cs">
+      <DependentUpon>ListCreatorPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Services\SiteHandler.cs" />
     <Compile Include="Utils\UtilApp.cs" />
     <Page Include="MainWindow.xaml">
@@ -125,6 +131,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Pages\ContentTypeCreatorPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\ListCreatorPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">

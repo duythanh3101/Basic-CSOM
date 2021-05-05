@@ -16,7 +16,7 @@ namespace Basic_CSOM.Entities.ContentTypes
 
         public override void CreateContentTypeTemplate(ClientContext context)
         {
-            Name = "Project Document";
+            //Name = "Project Document";
             ParentType = "Document";
             Fields = new List<BaseField>()
             {
