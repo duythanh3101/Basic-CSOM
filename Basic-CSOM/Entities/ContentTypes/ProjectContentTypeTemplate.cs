@@ -13,7 +13,7 @@ namespace Basic_CSOM.Entities.ContentTypes
 
         public override void CreateContentTypeTemplate(ClientContext context)
         {
-            Name = "Project";
+            Name = "Project Ver 2";
             Fields = new List<BaseField>
             {
                 new NewSiteColumn(context)
@@ -26,7 +26,7 @@ namespace Basic_CSOM.Entities.ContentTypes
                 {
                     InternalName = "ProjDescription",
                     DisplayName = "Project Description",
-                    SchemaXml = $"<Field ID='{Guid.NewGuid()}' Type='Note' Name='ProjDescription' StaticName='ProjDescription' DisplayName='Description' NumLines='6' RichText='FALSE' Sortable='FALSE' />"
+                    SchemaXml = $"<Field ID='{Guid.NewGuid()}' Type='Note' Name='ProjDescription' StaticName='ProjDescription' DisplayName='Project Description' NumLines='6' RichText='FALSE' Sortable='FALSE' />"
                 },
                 new NewSiteColumn(context)
                 {

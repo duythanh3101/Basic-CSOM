@@ -110,6 +110,7 @@
     <Compile Include="Entities\Lists\ProjectList.cs" />
     <Compile Include="Entities\Sites\BaseSite.cs" />
     <Compile Include="Enums\TypeSharepointEnum.cs" />
+    <Compile Include="Services\SiteHandler.cs" />
     <Compile Include="Utils\UtilApp.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -154,7 +155,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Seed\" />
-    <Folder Include="Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

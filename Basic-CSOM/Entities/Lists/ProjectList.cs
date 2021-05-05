@@ -15,7 +15,7 @@ namespace Basic_CSOM.Entities.Lists
         {
             this.context = context;
             Title = "ProjectList";
-            ContentTypeName = "Project";
+            ContentTypeName = "Project Ver 2";
             ViewTitle = "All Items";
             ShowColumns = new List<string>
             {
