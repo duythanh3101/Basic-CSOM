@@ -41,27 +41,34 @@ namespace Basic_CSOM.Pages
             EmployeeListName.Text = "EmployeeList";
             ProjectListName.Text = "Project";
             ProjectDocListName.Text = "Project Document";
+
+            EmployeeContentType.Text = "EmployeeTestList2";
+            ProjectContentType.Text = "Project Ver 2";
+            ProjectDocContentType.Text = "Project Document";
         }
 
         private void EmployeeList_OnClick(object sender, RoutedEventArgs e)
         {
             string name = EmployeeListName.Text.ToString().Trim();
-            CreateList<EmployeeList>(name);
+            string contentType = EmployeeContentType.Text.ToString().Trim();
+            CreateList<EmployeeList>(name, contentType);
         }
 
         private void ProjectList_OnClick(object sender, RoutedEventArgs e)
         {
             string name = ProjectListName.Text.ToString().Trim();
-            CreateList<ProjectList>(name);
+            string contentType = ProjectContentType.Text.ToString().Trim();
+            CreateList<ProjectList>(name, contentType);
         }
 
         private void ProjectDocList_OnClick(object sender, RoutedEventArgs e)
         {
             string name = ProjectDocListName.Text.ToString().Trim();
-            CreateList<DocProjectList>(name);
+            string contentType = ProjectDocContentType.Text.ToString().Trim();
+            CreateList<DocProjectList>(name, contentType);
         }
 
-        private void CreateList<T>(string name) where T: BaseList
+        private void CreateList<T>(string name, string contentType) where T: BaseList
         {
             if (UtilApp.IsExist(context, name, Enums.TypeSharepointEnum.List))
             {
@@ -71,6 +78,7 @@ namespace Basic_CSOM.Pages
             {
                 var instance = (BaseList)Activator.CreateInstance(typeof(T), context);
                 instance.Title = name;
+                instance.ContentTypeName = contentType;
 
                 currentList = instance.Generate();
                 MessageBox.Show("List is created successfully", "Notification", MessageBoxButton.OK, MessageBoxImage.Information);

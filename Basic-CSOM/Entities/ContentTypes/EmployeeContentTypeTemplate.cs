@@ -33,14 +33,17 @@ namespace Basic_CSOM.Entities.ContentTypes
                 {
                     InternalName = "ProgrammingLanguages",
                     DisplayName = "Programming Languages",
-                    SchemaXml = $"<Field ID='{Guid.NewGuid()}' Type='Choice' Name='ProgrammingLanguages' StaticName='ProgrammingLanguages' DisplayName='Programming Languages' Format='Dropdown' FillInChoice='FALSE'><CHOICES>" +
-                    "<CHOICE>C#</CHOICE>" +
-                    "<CHOICE>F#</CHOICE>" +
-                    "<CHOICE>Java</CHOICE>" +
-                    "<CHOICE>Jquery</CHOICE>" +
-                    "<CHOICE>AngularJS</CHOICE>" +
-                    "<CHOICE>Other</CHOICE>" +
-                    "</CHOICES></Field>"
+                    SchemaXml = $"<Field ID='{Guid.NewGuid()}' Type='MultiChoice' Name='ProgrammingLanguages' StaticName='ProgrammingLanguages' DisplayName='Programming Languages'>" +
+                                    "<Default>C#</Default>" +
+                                    "<CHOICES>" +
+                                        "<CHOICE>C#</CHOICE>" +
+                                        "<CHOICE>F#</CHOICE>" +
+                                        "<CHOICE>Java</CHOICE>" +
+                                        "<CHOICE>Jquery</CHOICE>" +
+                                        "<CHOICE>AngularJS</CHOICE>" +
+                                        "<CHOICE>Other</CHOICE>" +
+                                    "</CHOICES>" +
+                                "</Field>"
                 }
             };
             CreateFieldList();

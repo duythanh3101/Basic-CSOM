@@ -101,5 +101,18 @@ namespace Basic_CSOM.Utils
 
             return res;
         }
+
+        //public static string ChoiceFieldBuilder(Column col, List<string> choices)
+        //{
+        //    string fields = $"<Field ID='{Guid.NewGuid()}' Type='MultiChoice' Name='{col.Name}' DisplayName = '{col.DisplayName}' ><Default>{choices[0]}</Default>";
+        //    string choiceList = "";
+        //    foreach (string choice in choices)
+        //    {
+        //        choiceList += $"<CHOICE>{choice}</CHOICE>";
+        //    }
+        //    string choiceTemplate = "<CHOICES>" + choiceList + "</CHOICES></Field>";
+        //    string xml = fields + choiceTemplate;
+        //    return xml;
+        //}
     }
 }

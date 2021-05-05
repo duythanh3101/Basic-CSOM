@@ -8,6 +8,7 @@ using ListItemCollection = Microsoft.SharePoint.Client.ListItemCollection;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows;
+using Language = Basic_CSOM.Entities.Models.Language;
 
 namespace Basic_CSOM.Pages
 {
@@ -18,6 +19,7 @@ namespace Basic_CSOM.Pages
     {
         private ClientContext context;
         public ObservableCollection<Employee> Employees { get; set; }
+        //public ObservableCollection<string> LanguageList { get; set; } 
         private ListSP oList;
 
         public EmployeeListPage()
@@ -52,7 +54,17 @@ namespace Basic_CSOM.Pages
                     Title = oListItem.FieldValuesForEdit.FieldValues["Title"],
                     Email = oListItem.FieldValuesForEdit.FieldValues["EmailAdd"],
                     ShortDescription = oListItem.FieldValuesForEdit.FieldValues["ShortDesc"],
-                    FirstName = oListItem.FieldValuesForEdit.FieldValues["FirstName"]
+                    FirstName = oListItem.FieldValuesForEdit.FieldValues["FirstName"],
+                    Languages = new ObservableCollection<Language>()
+                    {
+                        new Language() { LanguageName = "C#"},
+                        new Language() { LanguageName = "F#"},
+                        new Language() { LanguageName = "Visual Basic"},
+                        new Language() { LanguageName = "JQuery"},
+                        new Language() { LanguageName = "Angular Js"},
+                        new Language() { LanguageName = "Other"}
+                    }
+
                 });
             }
             employeeGrid.ItemsSource = Employees;

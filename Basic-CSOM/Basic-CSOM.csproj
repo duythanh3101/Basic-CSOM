@@ -97,6 +97,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Constants\ScreenConstants.cs" />
     <Compile Include="Entities\ContentTypes\BaseContentType.cs" />
     <Compile Include="Entities\ContentTypes\EmployeeContentTypeTemplate.cs" />
     <Compile Include="Entities\ContentTypes\ProjectContentTypeTemplate.cs" />

@@ -14,14 +14,30 @@
                       AutoGenerateColumns="False"
                       VerticalScrollBarVisibility="Auto"
                       Margin="20 10 20 10"
-                      AlternationCount="{Binding Items.Count, RelativeSource={RelativeSource Self}}"
                       >
             <DataGrid.Columns>
-                <DataGridTextColumn Header="STT" Width="50" Binding="{Binding AlternationIndex, RelativeSource={RelativeSource AncestorType=DataGridRow}}"/>
+                <!--<DataGridTextColumn Header="STT" Width="50" Binding="{Binding AlternationIndex, RelativeSource={RelativeSource AncestorType=DataGridRow}}"/>-->
                 <DataGridTextColumn Header="Title" Width="200" Binding="{Binding Title}" IsReadOnly="False"/>
                 <DataGridTextColumn Header="First Name" Width="200" Binding="{Binding FirstName}" IsReadOnly="False"/>
                 <DataGridTextColumn Header="Short Description" Width="200" Binding="{Binding ShortDescription}" IsReadOnly="False"/>
                 <DataGridTextColumn Header="Email" Width="100" Binding="{Binding Email}" IsReadOnly="False"/>
+                <DataGridTextColumn Header="Language" Width="100" Binding="{Binding Language}" IsReadOnly="False"/>
+                <!--<DataGridComboBoxColumn Header="Languages" Width="100" SelectedValueBinding="{Binding LanguageName}" ItemsSource="{Binding Languages}">
+                   
+                </DataGridComboBoxColumn>-->
+                <!--<DataGridTemplateColumn Header="Edit" Width="100">
+                    <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <ComboBox ItemsSource="{Binding Languages}">
+                            <ComboBoxItem>
+                                <StackPanel>
+                                    <CheckBox Content="{Binding LanguageName}" IsChecked="{Binding IsChecked}"/>
+                                </StackPanel>
+                            </ComboBoxItem>
+                        </ComboBox>
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>-->
                 <DataGridTemplateColumn Header="Edit" Width="100">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
