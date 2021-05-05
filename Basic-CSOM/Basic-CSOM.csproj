@@ -101,6 +101,8 @@
     <Compile Include="Entities\ContentTypes\EmployeeContentTypeTemplate.cs" />
     <Compile Include="Entities\ContentTypes\ProjectContentTypeTemplate.cs" />
     <Compile Include="Entities\ContentTypes\ProjectDocumentContentTypeTemplate.cs" />
+    <Compile Include="Entities\Enums\LanguageEnum.cs" />
+    <Compile Include="Entities\Enums\StateEnum.cs" />
     <Compile Include="Entities\Fields\BaseField.cs" />
     <Compile Include="Entities\Fields\ExistSiteColumn.cs" />
     <Compile Include="Entities\Fields\NewSiteColumn.cs" />
@@ -109,6 +111,7 @@
     <Compile Include="Entities\Lists\EmployeeList.cs" />
     <Compile Include="Entities\Lists\ProjectList.cs" />
     <Compile Include="Entities\Models\Employee.cs" />
+    <Compile Include="Entities\Models\Project.cs" />
     <Compile Include="Entities\Sites\BaseSite.cs" />
     <Compile Include="Enums\TypeSharepointEnum.cs" />
     <Compile Include="Pages\ContentTypeCreatorPage.xaml.cs">
@@ -119,6 +122,9 @@
     </Compile>
     <Compile Include="Pages\ListCreatorPage.xaml.cs">
       <DependentUpon>ListCreatorPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ProjectListPage.xaml.cs">
+      <DependentUpon>ProjectListPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Services\SiteHandler.cs" />
     <Compile Include="Utils\UtilApp.cs" />
@@ -144,6 +150,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\ListCreatorPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\ProjectListPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

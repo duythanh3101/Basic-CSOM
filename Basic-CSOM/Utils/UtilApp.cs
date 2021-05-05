@@ -1,7 +1,9 @@
 ﻿using Basic_CSOM.Enums;
 using Microsoft.SharePoint.Client;
 using System;
+using System.ComponentModel;
 using System.Linq;
+using System.Reflection;
 using System.Security;
 
 namespace Basic_CSOM.Utils
@@ -74,6 +76,30 @@ namespace Basic_CSOM.Utils
                     break;
             }
             return isExist;
+        }
+
+        public static string GetStringFromEnum<TEnum>(this TEnum enumVal)
+        {
+            string res = null;
+
+            Type t = typeof(TEnum);
+            var val = t.GetEnumName(enumVal);
+
+            if (val == null)
+            {
+                return null;
+            }
+            var memInfo = t.GetMember(val);
+            if (memInfo.Length > 0)
+            {
+                var defaultVal = memInfo[0].GetCustomAttribute<DefaultValueAttribute>();
+                if (defaultVal != null && defaultVal.Value != null && defaultVal.Value.GetType() == typeof(string))
+                {
+                    return (string)defaultVal.Value;
+                }
+            }
+
+            return res;
         }
     }
 }

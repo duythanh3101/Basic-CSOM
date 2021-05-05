@@ -13,5 +13,6 @@ namespace Basic_CSOM.Entities.Models
         public string ShortDescription { get; set; }
         public string Email { get; set; }
         public string FirstName { get; set; }
+        public string LastName { get; set; }
     }
 }
