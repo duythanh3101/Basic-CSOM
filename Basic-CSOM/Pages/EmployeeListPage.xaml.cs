@@ -48,6 +48,7 @@ namespace Basic_CSOM.Pages
 
             foreach (ListItem oListItem in collListItem)
             {
+                string lang = oListItem.FieldValuesForEdit.FieldValues["ProgrammingLanguages"];
                 Employees.Add(new Employee()
                 {
                     Id = oListItem.Id,
@@ -57,17 +58,22 @@ namespace Basic_CSOM.Pages
                     FirstName = oListItem.FieldValuesForEdit.FieldValues["FirstName"],
                     Languages = new ObservableCollection<Language>()
                     {
-                        new Language() { LanguageName = "C#"},
-                        new Language() { LanguageName = "F#"},
-                        new Language() { LanguageName = "Visual Basic"},
-                        new Language() { LanguageName = "JQuery"},
-                        new Language() { LanguageName = "Angular Js"},
-                        new Language() { LanguageName = "Other"}
+                        new Language() { LanguageName = "C#", IsChecked = IsContain(lang, "C#") },
+                        new Language() { LanguageName = "F#", IsChecked = IsContain(lang, "F#")},
+                        new Language() { LanguageName = "Visual Basic", IsChecked = IsContain(lang, "Visual Basic")},
+                        new Language() { LanguageName = "JQuery", IsChecked = IsContain(lang, "JQuery")},
+                        new Language() { LanguageName = "Angular Js", IsChecked = IsContain(lang, "Angular Js")},
+                        new Language() { LanguageName = "Other", IsChecked = IsContain(lang, "Other")}
                     }
 
                 });
             }
             employeeGrid.ItemsSource = Employees;
+        }
+
+        public bool IsContain(string target, string text)
+        {
+            return target.Contains(text);
         }
 
 

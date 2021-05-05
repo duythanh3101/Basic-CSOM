@@ -17,7 +17,7 @@ namespace Basic_CSOM.Entities.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public LanguageEnum Language { get; set; }
-        public ObservableCollection<Language> Languages { get; set; } 
+        public ObservableCollection<Language> Languages { get; set; } = new ObservableCollection<Language>();
     }
 
     //"C#", "F#", "Visual Basic", "JQuery", "Angular Js", "Other"

@@ -21,23 +21,23 @@
                 <DataGridTextColumn Header="First Name" Width="200" Binding="{Binding FirstName}" IsReadOnly="False"/>
                 <DataGridTextColumn Header="Short Description" Width="200" Binding="{Binding ShortDescription}" IsReadOnly="False"/>
                 <DataGridTextColumn Header="Email" Width="100" Binding="{Binding Email}" IsReadOnly="False"/>
-                <DataGridTextColumn Header="Language" Width="100" Binding="{Binding Language}" IsReadOnly="False"/>
+                <!--<DataGridTextColumn Header="Language" Width="100" Binding="{Binding Language}" IsReadOnly="False"/>-->
                 <!--<DataGridComboBoxColumn Header="Languages" Width="100" SelectedValueBinding="{Binding LanguageName}" ItemsSource="{Binding Languages}">
                    
                 </DataGridComboBoxColumn>-->
-                <!--<DataGridTemplateColumn Header="Edit" Width="100">
+                <DataGridTemplateColumn Header="LanguageName" Width="100">
                     <DataGridTemplateColumn.CellTemplate>
-                    <DataTemplate>
-                        <ComboBox ItemsSource="{Binding Languages}">
-                            <ComboBoxItem>
-                                <StackPanel>
-                                    <CheckBox Content="{Binding LanguageName}" IsChecked="{Binding IsChecked}"/>
-                                </StackPanel>
-                            </ComboBoxItem>
-                        </ComboBox>
-                    </DataTemplate>
-                </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>-->
+                        <DataTemplate>
+                            <ComboBox ItemsSource="{Binding Languages}">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <CheckBox Content="{Binding LanguageName}" IsChecked="{Binding IsChecked}"/>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
                 <DataGridTemplateColumn Header="Edit" Width="100">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
