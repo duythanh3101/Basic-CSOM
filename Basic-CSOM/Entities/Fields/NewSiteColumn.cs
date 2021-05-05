@@ -1,10 +1,6 @@
-﻿using Basic_CSOM.Utils;
+﻿using Basic_CSOM.Enums;
+using Basic_CSOM.Utils;
 using Microsoft.SharePoint.Client;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Basic_CSOM.Entities.Fields
 {
@@ -23,7 +19,7 @@ namespace Basic_CSOM.Entities.Fields
                 return filed;
             }
 
-            if (UtilApp.IsExist(Context, DisplayName, Enums.TypeSharepointEnum.SiteColumn))
+            if (UtilApp.IsExist(Context, DisplayName, TypeSharepointEnum.SiteColumn))
             {
                 return null;
             }

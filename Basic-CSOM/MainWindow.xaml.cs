@@ -21,7 +21,7 @@ namespace Basic_CSOM
     {
         string url = "https://m365b326364.sharepoint.com/sites/testcsom";
         string user = "admin@m365b326364.onmicrosoft.com";
-        SecureString password = UtilApp.GetSecureString("");
+        SecureString password = UtilApp.GetSecureString("Fgakdhsj123");
         private ClientContext context;
 
         public MainWindow()
