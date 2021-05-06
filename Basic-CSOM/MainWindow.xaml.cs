@@ -19,7 +19,7 @@ namespace Basic_CSOM
     /// </summary>
     public partial class MainWindow : Window
     {
-        string url = "https://m365b326364.sharepoint.com/sites/csom-training";
+        string url = "https://m365b326364.sharepoint.com/sites/basiccsom";
         string user = "admin@m365b326364.onmicrosoft.com";
         SecureString password = UtilApp.GetSecureString("Fgakdhsj123");
         private ClientContext context;
@@ -77,7 +77,7 @@ namespace Basic_CSOM
 
         private void ProjectListButton_Clicked(object sender, RoutedEventArgs e)
         {
-
+            MainFrame.Content = new ProjectListPage(context);
         }
 
         private void ProjectDocListButton_Clicked(object sender, RoutedEventArgs e)

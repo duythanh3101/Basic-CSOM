@@ -23,7 +23,7 @@ namespace Basic_CSOM.Entities.Lists
             };
         }
 
-        public override void UpdateListitemLookup(List targetList, ListCollection webListCollection)
+        public override void UpdateListitemLookup(List targetList, ListCollection webListCollection, ContentType contentType)
         {
             var relatedList = webListCollection.GetByTitle(DependListTitle);
             if (relatedList == null)

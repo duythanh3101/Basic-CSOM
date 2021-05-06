@@ -53,14 +53,14 @@ namespace Basic_CSOM.Entities.Lists
             newList.Update();
             //Context.ExecuteQuery();
 
-            UpdateListitemLookup(newList, web.Lists);
+            UpdateListitemLookup(newList, web.Lists, contentType);
             LoadView(newList);
             Context.ExecuteQuery();
 
             return newList;
         }
 
-        public virtual void UpdateListitemLookup(List list, ListCollection webListCollection) { }
+        public virtual void UpdateListitemLookup(List list, ListCollection webListCollection, ContentType contentType) { }
 
         private void LoadView(List list)
         {
@@ -167,6 +167,24 @@ namespace Basic_CSOM.Entities.Lists
             // Option 2: Ends Here(Above line)
 
             oItem.DeleteObject();
+            Context.ExecuteQuery();
+        }
+
+        public void UpdateFieldToContentType(ContentType targetContentType, Field targetField)
+        {
+            // Update content type
+            FieldLinkCreationInformation fldLink = new FieldLinkCreationInformation();
+            fldLink.Field = targetField;
+
+            // If uou set this to "true", the column getting added to the content type will be added as "required" field
+            fldLink.Field.Required = false;
+
+            // If you set this to "true", the column getting added to the content type will be added as "hidden" field
+            fldLink.Field.Hidden = false;
+
+            targetContentType.FieldLinks.Add(fldLink);
+            targetContentType.Update(false);
+
             Context.ExecuteQuery();
         }
     }

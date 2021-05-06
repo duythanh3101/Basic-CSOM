@@ -1,4 +1,5 @@
-﻿using Microsoft.SharePoint.Client;
+﻿using Basic_CSOM.Utils;
+using Microsoft.SharePoint.Client;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,12 +11,12 @@ namespace Basic_CSOM.Entities.Lists
     public class ProjectList : BaseList
     {
         private ClientContext context;
-        private string DependListTitle = "ProjectList";
+        private string DependListTitle = "EmployeeList";
         public ProjectList(ClientContext context) : base(context)
         {
             this.context = context;
             Title = "ProjectList";
-            ContentTypeName = "Project Ver 2";
+            ContentTypeName = "Project";
             ViewTitle = "All Items";
             ShowColumns = new List<string>
             {
@@ -28,10 +29,10 @@ namespace Basic_CSOM.Entities.Lists
 
         }
 
-        public override void UpdateListitemLookup(List list, ListCollection webListCollection)
+        public override void UpdateListitemLookup(List list, ListCollection webListCollection, ContentType contentType)
         {
             var relatedList = webListCollection.GetByTitle(DependListTitle);
-            if (relatedList == null)
+            if (relatedList == null || !UtilApp.IsExist(context, DependListTitle, Basic_CSOM.Enums.TypeSharepointEnum.List))
             {
                 return;
             }
@@ -44,6 +45,7 @@ namespace Basic_CSOM.Entities.Lists
             leaderField.SetShowInEditForm(true);
             leaderField.SetShowInNewForm(true);
             context.Load(leaderField);
+            UpdateFieldToContentType(contentType, leaderField);
 
             // Add member field
             string memberFieldSchema = $"<Field ID='{Guid.NewGuid()}' Type='LookupMulti' Name='Member' StaticName='Member' DisplayName='Member' List='{relatedList.Id}' ShowField='Title' Mult='TRUE' />";
@@ -51,8 +53,11 @@ namespace Basic_CSOM.Entities.Lists
             memberField.SetShowInEditForm(true);
             memberField.SetShowInNewForm(true);
             context.Load(memberField);
+            UpdateFieldToContentType(contentType, memberField);
 
             list.Update();
+
+          
         }
 
     }

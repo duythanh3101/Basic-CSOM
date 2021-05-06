@@ -11,6 +11,7 @@ using System.Windows;
 using Language = Basic_CSOM.Entities.Models.Language;
 using System.Linq;
 using Basic_CSOM.Constants;
+using Basic_CSOM.Utils;
 
 namespace Basic_CSOM.Pages
 {
@@ -34,7 +35,14 @@ namespace Basic_CSOM.Pages
             InitializeComponent();
             this.context = context;
             Employees = new ObservableCollection<Employee>();
-            Load(listName);
+            if (UtilApp.IsExist(context, listName, Enums.TypeSharepointEnum.List))
+            {
+                Load(listName);
+            }
+            else
+            {
+                MessageBox.Show($"List name {listName} is not existed");
+            }
         }
 
         private void Load(string listName)
