@@ -22,8 +22,6 @@ namespace Basic_CSOM.Pages
         private ClientContext context;
         public ObservableCollection<Project> ProjectList { get; set; }
         private ListSP oList;
-        private ListSP employeeList;
-        private string employeeListName = "EmployeeList";
 
         public ProjectListPage()
         {

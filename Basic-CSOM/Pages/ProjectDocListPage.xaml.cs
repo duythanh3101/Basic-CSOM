@@ -1,7 +1,11 @@
 ﻿using Basic_CSOM.Utils;
 using Microsoft.SharePoint.Client;
+using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
+using ListItemCollection = Microsoft.SharePoint.Client.ListItemCollection;
+using ListSP = Microsoft.SharePoint.Client.List;
 
 namespace Basic_CSOM.Pages
 {
@@ -17,7 +21,7 @@ namespace Basic_CSOM.Pages
 
         private ClientContext context;
         private ListSP oList;
-        public ProjectDocListPage(ClientContext context, string listName = "ProjectList")
+        public ProjectDocListPage(ClientContext context, string listName = "Project Document List")
         {
             InitializeComponent();
 
@@ -40,6 +44,38 @@ namespace Basic_CSOM.Pages
             camlQuery.ViewXml = @"<View><RowLimit>100</RowLimit></View>";
             ListItemCollection collListItem = oList.GetItems(camlQuery);
             context.Load(collListItem, items => items.Include(item => item.Id, item => item.DisplayName, item => item.FieldValuesForEdit));
+            context.ExecuteQuery();
+
+            foreach (ListItem oListItem in collListItem)
+            {
+
+            }
+            Seeding();
+        }
+
+        private void Seeding()
+        {
+            string sourcePath = @"C:\Users\thp2\OneDrive - Precio Fishbone AB\Skrivbordet\btSharepoint2.txt";
+            FileCreationInformation _file = new FileCreationInformation();
+            _file.Content = System.IO.File.ReadAllBytes(sourcePath);
+            _file.Overwrite = true;
+            _file.Url = System.IO.Path.GetFileName(sourcePath);
+
+            File uploadfile = oList.RootFolder.Files.Add(_file);
+
+            //Add Data. 
+            var newItem1 = uploadfile.ListItemAllFields;
+            newItem1["Title"] = $"Project Doc {Guid.NewGuid()}";
+            newItem1["DocDescription"] = "A12345";
+            newItem1["DocType"] = "Business requirement";
+
+            // Leader
+            FieldLookupValue lv = new FieldLookupValue();
+            lv.LookupId = 1;
+            newItem1["ProjectList"] = lv;
+
+            newItem1.Update();
+            //context.Load(uploadfile);
             context.ExecuteQuery();
         }
     }

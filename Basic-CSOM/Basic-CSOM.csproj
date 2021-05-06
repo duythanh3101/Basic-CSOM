@@ -124,6 +124,9 @@
     <Compile Include="Pages\ListCreatorPage.xaml.cs">
       <DependentUpon>ListCreatorPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\ProjectDocListPage.xaml.cs">
+      <DependentUpon>ProjectDocListPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\ProjectListPage.xaml.cs">
       <DependentUpon>ProjectListPage.xaml</DependentUpon>
     </Compile>
@@ -152,6 +155,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\ListCreatorPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\ProjectDocListPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
