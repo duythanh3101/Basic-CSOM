@@ -82,7 +82,8 @@ namespace Basic_CSOM
 
         private void ProjectDocListButton_Clicked(object sender, RoutedEventArgs e)
         {
-
+            PageHandler pageHandler = new PageHandler(context);
+            pageHandler.AddPublishingPage();
         }
 
         private void ListButton_Clicked(object sender, RoutedEventArgs e)

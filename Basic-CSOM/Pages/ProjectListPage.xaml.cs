@@ -134,7 +134,19 @@ namespace Basic_CSOM.Pages
                     listItem["StartDate"] = pro.StartDate;
                     listItem["_EndDate"] = pro.EndDate;
                     listItem["State"] = pro.State;
+
+                    // Leader
+                    FieldLookupValue lookup = listItem["Leader"] as FieldLookupValue;
+                    lookup.LookupId = 2;
+                    listItem["Leader"] = lookup;
+
+                    // Members
+                    List<FieldLookupValue> lvList = new List<FieldLookupValue>();
+                    lvList.Add(lookup);
+                    lvList.Add(new FieldLookupValue() { LookupId = 1 });
+                    listItem["Member"] = lvList;
                     listItem.Update();
+                    context.ExecuteQuery();
 
                     context.ExecuteQuery();
                 }
@@ -262,5 +274,7 @@ namespace Basic_CSOM.Pages
 
             context.ExecuteQuery();
         }
+
+      
     }
 }

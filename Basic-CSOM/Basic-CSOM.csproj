@@ -127,6 +127,7 @@
     <Compile Include="Pages\ProjectListPage.xaml.cs">
       <DependentUpon>ProjectListPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Services\PageHandler.cs" />
     <Compile Include="Services\SiteHandler.cs" />
     <Compile Include="Utils\UtilApp.cs" />
     <Page Include="MainWindow.xaml">

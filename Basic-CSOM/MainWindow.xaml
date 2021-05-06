@@ -30,7 +30,7 @@
                 <Button x:Name="ListButton" Content="Create List" Click="ListButton_Clicked"/>
                 <Button x:Name="EmployeeListButton" Content="Employee List" Click="EmployeeListButton_Clicked"/>
                 <Button x:Name="ProjectListButton" Content="Project List" Click="ProjectListButton_Clicked"/>
-                <Button x:Name="ProjectDocListButton" Content="Project Document List" Click="ProjectDocListButton_Clicked"/>
+                <Button x:Name="ProjectDocListButton" Content="Create page" Click="ProjectDocListButton_Clicked"/>
             </StackPanel>
             <Border BorderBrush="Black" BorderThickness="0 0 0 1"/>
             <Frame Name="MainFrame"/>

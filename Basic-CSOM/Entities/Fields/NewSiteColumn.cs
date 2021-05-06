@@ -26,7 +26,6 @@ namespace Basic_CSOM.Entities.Fields
             var web = Context.Web;
             Field newField = web.Fields.AddFieldAsXml(SchemaXml, false, AddFieldOptions.AddFieldInternalNameHint);
 
-            //Context.Load(filed);
             Context.Load(web);
             Context.Load(newField);
             Context.ExecuteQuery();
