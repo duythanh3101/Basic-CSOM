@@ -157,30 +157,11 @@ namespace Basic_CSOM.Pages
             }
         }
 
-        private string GetLanguage(ObservableCollection<Language> languages)
-        {
-            string result = string.Empty;
-
-            if (languages != null && languages.Count > 0)
-            {
-                result = languages[0].IsChecked ? languages[0].LanguageName : string.Empty;
-                for (int i = 1; i < languages.Count; i++)
-                {
-                    if (languages[i].IsChecked)
-                    {
-                        result = result + ";#" + languages[i].LanguageName;
-                    }
-                }
-            }
-
-            return result;
-        }
-
         private void Delete_Clicked(object sender, RoutedEventArgs e)
         {
             if (sender is Button btn)
             {
-                if (btn.DataContext is Employee emp)
+                if (btn.DataContext is Project emp)
                 {
                     // Display message box
                     MessageBoxResult result = MessageBox.Show("Do you want to delete this row", "Information", MessageBoxButton.YesNo, MessageBoxImage.Question);
@@ -203,7 +184,7 @@ namespace Basic_CSOM.Pages
 
         }
 
-        private void Delete(Employee emp)
+        private void Delete(Project emp)
         {
             if (oList != null)
             {
