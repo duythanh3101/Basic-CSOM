@@ -1,4 +1,5 @@
-﻿using Basic_CSOM.Entities.Fields;
+﻿using Basic_CSOM.Constants;
+using Basic_CSOM.Entities.Fields;
 using Microsoft.SharePoint.Client;
 using System;
 using System.Collections.Generic;
@@ -19,29 +20,30 @@ namespace Basic_CSOM.Entities.ContentTypes
                 new ExistSiteColumn(context) { InternalName = "FirstName" },
                 new NewSiteColumn(context)
                 {
-                    InternalName = "EmailAdd",
+                    InternalName = ScreenConstants.EmailAdd,
                     DisplayName = "Email Address",
                     SchemaXml = $"<Field ID='{Guid.NewGuid()}' Type='Text' Name='EmailAdd' StaticName='EmailAdd' DisplayName='Email Address' />"
                 },
                 new NewSiteColumn(context)
                 {
-                    InternalName = "ShortDesc",
+                    InternalName = ScreenConstants.ShortDesc,
                     DisplayName = "Short Description",
                     SchemaXml = $"<Field ID='{Guid.NewGuid()}' Type='Note' Name='ShortDesc' StaticName='ShortDesc' DisplayName='Short Description' NumLines='6' RichText='TRUE' RichTextMode='FullHtml' IsolateStyles='TRUE' Sortable='FALSE' />"
                 },
                 new NewSiteColumn(context)
                 {
-                    InternalName = "ProgrammingLanguages",
+                    InternalName = ScreenConstants.ProgramLanguage,
                     DisplayName = "Programming Languages",
                     SchemaXml = $"<Field ID='{Guid.NewGuid()}' Type='MultiChoice' Name='ProgrammingLanguages' StaticName='ProgrammingLanguages' DisplayName='Programming Languages'>" +
-                                    "<Default>C#</Default>" +
+                                    $"<Default>{ScreenConstants.CSharp}</Default>" +
                                     "<CHOICES>" +
-                                        "<CHOICE>C#</CHOICE>" +
-                                        "<CHOICE>F#</CHOICE>" +
-                                        "<CHOICE>Java</CHOICE>" +
-                                        "<CHOICE>Jquery</CHOICE>" +
-                                        "<CHOICE>AngularJS</CHOICE>" +
-                                        "<CHOICE>Other</CHOICE>" +
+                                        $"<CHOICE>{ScreenConstants.CSharp}</CHOICE>" +
+                                        $"<CHOICE>{ScreenConstants.FSharp}</CHOICE>" +
+                                        $"<CHOICE>{ScreenConstants.Java}</CHOICE>" +
+                                        $"<CHOICE>{ScreenConstants.VisualBasic}</CHOICE>" +
+                                        $"<CHOICE>{ScreenConstants.Jquery}</CHOICE>" +
+                                        $"<CHOICE>{ScreenConstants.AngularJS}</CHOICE>" +
+                                        $"<CHOICE>{ScreenConstants.Other}</CHOICE>" +
                                     "</CHOICES>" +
                                 "</Field>"
                 }

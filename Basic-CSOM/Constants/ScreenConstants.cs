@@ -15,5 +15,9 @@ namespace Basic_CSOM.Constants
         public static string Java = "Java";
         public static string Jquery = "Jquery";
         public static string Other = "Other";
+
+        public static string ProgramLanguage = "ProgrammingLanguages";
+        public static string EmailAdd = "EmailAdd";
+        public static string ShortDesc = "ShortDesc";
     }
 }

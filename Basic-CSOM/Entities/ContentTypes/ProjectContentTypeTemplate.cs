@@ -33,12 +33,12 @@ namespace Basic_CSOM.Entities.ContentTypes
                     InternalName = "State",
                     DisplayName = "State",
                     SchemaXml = $"<Field ID='{Guid.NewGuid()}' Type='Choice' Name='State' StaticName='State' DisplayName='State' Format='Dropdown'><CHOICES>" +
-                    "<CHOICE>Signed</CHOICE>" +
-                    "<CHOICE>Design</CHOICE>" +
-                    "<CHOICE>Development</CHOICE>" +
-                    "<CHOICE>Maintenance</CHOICE>" +
-                    "<CHOICE>Closed</CHOICE>" +
-                    "</CHOICES></Field>"
+                                "<CHOICE>Signed</CHOICE>" +
+                                "<CHOICE>Design</CHOICE>" +
+                                "<CHOICE>Development</CHOICE>" +
+                                "<CHOICE>Maintenance</CHOICE>" +
+                                "<CHOICE>Closed</CHOICE>" +
+                                "</CHOICES></Field>"
                 },
                 new ExistSiteColumn(context)
                 {
