@@ -9,6 +9,8 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows;
 using Language = Basic_CSOM.Entities.Models.Language;
+using System.Linq;
+using Basic_CSOM.Constants;
 
 namespace Basic_CSOM.Pages
 {
@@ -58,12 +60,13 @@ namespace Basic_CSOM.Pages
                     FirstName = oListItem.FieldValuesForEdit.FieldValues["FirstName"],
                     Languages = new ObservableCollection<Language>()
                     {
-                        new Language() { LanguageName = "C#", IsChecked = IsContain(lang, "C#") },
-                        new Language() { LanguageName = "F#", IsChecked = IsContain(lang, "F#")},
-                        new Language() { LanguageName = "Visual Basic", IsChecked = IsContain(lang, "Visual Basic")},
-                        new Language() { LanguageName = "JQuery", IsChecked = IsContain(lang, "JQuery")},
-                        new Language() { LanguageName = "Angular Js", IsChecked = IsContain(lang, "Angular Js")},
-                        new Language() { LanguageName = "Other", IsChecked = IsContain(lang, "Other")}
+                        new Language() { LanguageName = ScreenConstants.CSharp, IsChecked = IsContain(lang, ScreenConstants.CSharp) },
+                        new Language() { LanguageName = ScreenConstants.FSharp, IsChecked = IsContain(lang, ScreenConstants.FSharp)},
+                        new Language() { LanguageName = ScreenConstants.VisualBasic, IsChecked = IsContain(lang, ScreenConstants.VisualBasic)},
+                        new Language() { LanguageName = ScreenConstants.Java, IsChecked = IsContain(lang, ScreenConstants.Java)},
+                        new Language() { LanguageName = ScreenConstants.Jquery, IsChecked = IsContain(lang, ScreenConstants.Jquery)},
+                        new Language() { LanguageName = ScreenConstants.AngularJS, IsChecked = IsContain(lang, ScreenConstants.AngularJS)},
+                        new Language() { LanguageName = ScreenConstants.Other, IsChecked = IsContain(lang, ScreenConstants.Other)}
                     }
 
                 });
@@ -108,6 +111,7 @@ namespace Basic_CSOM.Pages
         {
             if (oList != null)
             {
+                string lang = GetLanguage(emp.Languages);
                 // Edit
                 if (emp.Id != 0)
                 {
@@ -119,6 +123,7 @@ namespace Basic_CSOM.Pages
                     listItem["ShortDesc"] = emp.ShortDescription;
                     listItem["FirstName"] = emp.FirstName;
                     listItem["Title"] = emp.Title;
+                    listItem["ProgrammingLanguages"] = lang;
                     listItem.Update();
 
                     context.ExecuteQuery();
@@ -132,12 +137,32 @@ namespace Basic_CSOM.Pages
                     newItem["ShortDesc"] = emp.ShortDescription;
                     newItem["FirstName"] = emp.FirstName;
                     newItem["Title"] = emp.Title;
+                    newItem["ProgrammingLanguages"] = lang;
                     newItem.Update();
 
                     context.ExecuteQuery();
                 }
 
             }
+        }
+
+        private string GetLanguage(ObservableCollection<Language> languages)
+        {
+            string result = string.Empty;
+
+            if (languages != null && languages.Count > 0)
+            {
+                result = languages[0].IsChecked ? languages[0].LanguageName : string.Empty;
+                for (int i = 1; i < languages.Count; i++)
+                {
+                    if (languages[i].IsChecked)
+                    {
+                        result = result + ";#" + languages[i].LanguageName;
+                    }
+                }
+            }
+
+            return result;
         }
 
         private void Delete_Clicked(object sender, RoutedEventArgs e)
