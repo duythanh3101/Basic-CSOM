@@ -19,7 +19,7 @@ namespace Basic_CSOM
     /// </summary>
     public partial class MainWindow : Window
     {
-        string url = "https://m365b326364.sharepoint.com/sites/basiccsom";
+        string url = "https://m365b326364.sharepoint.com/sites/bird";
         string user = "admin@m365b326364.onmicrosoft.com";
         SecureString password = UtilApp.GetSecureString("Fgakdhsj123");
         private ClientContext context;
@@ -40,21 +40,6 @@ namespace Basic_CSOM
             {
                 var web = context.Web;
                 context.Load(web, w => w.Title, w => w.Description);
-                //var query = from list in web.Lists.Include(x => x.Fields) where list.Hidden == false && list.ItemCount > 0 select list;
-                //var lists = context.LoadQuery(query);
-                //context.ExecuteQuery();
-                //Console.WriteLine($"Title: {web.Title}");
-
-                //var a = new ProjectContentTypeTemplate(context);
-                //a.Create();
-
-                //var a = new NewSiteColumn(context);
-                //a.SchemaXml = $"<Field ID='{Guid.NewGuid()}' Type='Text' Name='Field123' StaticName='Field123' DisplayName='Test Field 2' />";
-                //a.InternalName = "Field123";
-                //a.Create();
-
-                //var list = new ProjectList(context);
-                //list.Generate();
 
                 //SiteHandler siteHandler = new SiteHandler(context);
                 //siteHandler.CreateHRSubsite();
