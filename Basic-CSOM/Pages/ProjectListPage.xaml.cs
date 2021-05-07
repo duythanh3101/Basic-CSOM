@@ -123,9 +123,10 @@ namespace Basic_CSOM.Pages
                 // Edit
                 if (pro.Id != 0)
                 {
+                   
+
                     // Assume there is a list item with ID=1.
                     ListItem listItem = oList.GetItemById(pro.Id);
-
                     // Write a new value to the Body field of the Announcement item.
                     listItem["ProjectName"] = pro.ProjectName;
                     listItem["ProjDescription"] = pro.Description;
@@ -134,7 +135,7 @@ namespace Basic_CSOM.Pages
                     listItem["State"] = pro.State;
 
                     // Leader
-                    FieldLookupValue lookup = listItem["Leader"] as FieldLookupValue;
+                    FieldLookupValue lookup = new FieldLookupValue();
                     lookup.LookupId = 2;
                     listItem["Leader"] = lookup;
 

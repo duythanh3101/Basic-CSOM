@@ -40,7 +40,7 @@ namespace Basic_CSOM.Entities.Lists
             newField.SetShowInEditForm(true);
             newField.SetShowInNewForm(true);
             context.Load(newField);
-            UpdateFieldToContentType(contentType, newField);
+            UpdateFieldToContentType(contentType, newField, "Project");
 
             context.Load(fields);
             context.ExecuteQuery();

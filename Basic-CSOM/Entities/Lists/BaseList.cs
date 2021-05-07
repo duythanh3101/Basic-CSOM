@@ -1,4 +1,5 @@
-﻿using Microsoft.SharePoint.Client;
+﻿using Basic_CSOM.Utils;
+using Microsoft.SharePoint.Client;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -50,6 +51,12 @@ namespace Basic_CSOM.Entities.Lists
             }
             newList.ContentTypesEnabled = true;
             newList.ContentTypes.AddExistingContentType(contentType);
+            if (TemplateType == (int)ListTemplateType.GenericList)
+            {
+                var itemContentType = GetContentType(newList.ContentTypes, "Item");
+                if (itemContentType != null)
+                    itemContentType.DeleteObject();
+            }
             newList.Update();
             //Context.ExecuteQuery();
 
@@ -170,8 +177,16 @@ namespace Basic_CSOM.Entities.Lists
             Context.ExecuteQuery();
         }
 
-        public void UpdateFieldToContentType(ContentType targetContentType, Field targetField)
+        public void UpdateFieldToContentType(ContentType targetContentType, Field targetField, string fieldName)
         {
+            //if (UtilApp.IsExist(Context, fieldName, Basic_CSOM.Enums.TypeSharepointEnum.SiteColumn))
+            //{
+            //    return;
+            //}
+
+            Context.Load(targetContentType, x => x.FieldLinks.Include(item => item.Name));
+            Context.ExecuteQuery();
+
             // Update content type
             FieldLinkCreationInformation fldLink = new FieldLinkCreationInformation();
             fldLink.Field = targetField;
@@ -182,7 +197,10 @@ namespace Basic_CSOM.Entities.Lists
             // If you set this to "true", the column getting added to the content type will be added as "hidden" field
             fldLink.Field.Hidden = false;
 
-            targetContentType.FieldLinks.Add(fldLink);
+            if (targetContentType.FieldLinks.FirstOrDefault(x => x.Name.Equals(fieldName)) == null)
+            {
+                targetContentType.FieldLinks.Add(fldLink);
+            }
             targetContentType.Update(false);
             Context.Load(targetContentType);
             Context.ExecuteQuery();

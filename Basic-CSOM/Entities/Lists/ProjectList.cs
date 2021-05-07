@@ -45,7 +45,7 @@ namespace Basic_CSOM.Entities.Lists
             leaderField.SetShowInEditForm(true);
             leaderField.SetShowInNewForm(true);
             context.Load(leaderField);
-            UpdateFieldToContentType(contentType, leaderField);
+            UpdateFieldToContentType(contentType, leaderField, "Leader");
 
             // Add member field
             string memberFieldSchema = $"<Field ID='{Guid.NewGuid()}' Type='LookupMulti' Name='Member' StaticName='Member' DisplayName='Member' List='{relatedList.Id}' ShowField='Title' Mult='TRUE' />";
@@ -53,7 +53,7 @@ namespace Basic_CSOM.Entities.Lists
             memberField.SetShowInEditForm(true);
             memberField.SetShowInNewForm(true);
             context.Load(memberField);
-            UpdateFieldToContentType(contentType, memberField);
+            UpdateFieldToContentType(contentType, memberField, "Member");
 
             list.Update();
 

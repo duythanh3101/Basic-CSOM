@@ -160,12 +160,18 @@ namespace Basic_CSOM.Pages
 
             if (languages != null && languages.Count > 0)
             {
-                result = languages[0].IsChecked ? languages[0].LanguageName : string.Empty;
                 for (int i = 1; i < languages.Count; i++)
                 {
                     if (languages[i].IsChecked)
                     {
-                        result = result + ";#" + languages[i].LanguageName;
+                        if (string.IsNullOrEmpty(result))
+                        {
+                            result += languages[i].LanguageName;
+                        }
+                        else
+                        {
+                            result = result + ";#" + languages[i].LanguageName;
+                        }
                     }
                 }
             }

@@ -19,7 +19,7 @@ namespace Basic_CSOM
     /// </summary>
     public partial class MainWindow : Window
     {
-        string url = "https://m365b326364.sharepoint.com/sites/bird";
+        string url = "https://m365b326364.sharepoint.com/sites/lion";
         string user = "admin@m365b326364.onmicrosoft.com";
         SecureString password = UtilApp.GetSecureString("Fgakdhsj123");
         private ClientContext context;

@@ -12,6 +12,7 @@
         <DataGrid x:Name="employeeGrid" Height="400"
                       CanUserReorderColumns="False"
                       AutoGenerateColumns="False"
+                      CanUserAddRows="True"
                       VerticalScrollBarVisibility="Auto"
                       Margin="20 10 20 10"
                       >
