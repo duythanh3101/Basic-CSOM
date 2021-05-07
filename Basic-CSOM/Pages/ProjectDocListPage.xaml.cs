@@ -21,6 +21,8 @@ namespace Basic_CSOM.Pages
 
         private ClientContext context;
         private ListSP oList;
+        string sourcePath = @"C:\Users\thp2\OneDrive - Precio Fishbone AB\Skrivbordet\btSharepoint2.txt";
+
         public ProjectDocListPage(ClientContext context, string listName = "Project Document List")
         {
             InitializeComponent();
@@ -46,16 +48,16 @@ namespace Basic_CSOM.Pages
             context.Load(collListItem, items => items.Include(item => item.Id, item => item.DisplayName, item => item.FieldValuesForEdit));
             context.ExecuteQuery();
 
-            foreach (ListItem oListItem in collListItem)
-            {
+            //foreach (ListItem oListItem in collListItem)
+            //{
 
-            }
-            Seeding();
+            //}
+            //Seeding();
+            //Update();
         }
 
         private void Seeding()
         {
-            string sourcePath = @"C:\Users\thp2\OneDrive - Precio Fishbone AB\Skrivbordet\btSharepoint2.txt";
             FileCreationInformation _file = new FileCreationInformation();
             _file.Content = System.IO.File.ReadAllBytes(sourcePath);
             _file.Overwrite = true;
@@ -72,6 +74,26 @@ namespace Basic_CSOM.Pages
             // Leader
             FieldLookupValue lv = new FieldLookupValue();
             lv.LookupId = 1;
+            newItem1["ProjectList"] = lv;
+
+            newItem1.Update();
+            //context.Load(uploadfile);
+            context.ExecuteQuery();
+        }
+
+        private void Update()
+        {
+            File uploadfile = oList.RootFolder.Files.GetByUrl(sourcePath);
+
+            //Add Data. 
+            var newItem1 = uploadfile.ListItemAllFields;
+            newItem1["Title"] = $"Project Doc {Guid.NewGuid()}";
+            newItem1["DocDescription"] = "A12345";
+            newItem1["DocType"] = "Business requirement";
+
+            // Leader
+            FieldLookupValue lv = new FieldLookupValue();
+            lv.LookupId = 2;
             newItem1["ProjectList"] = lv;
 
             newItem1.Update();

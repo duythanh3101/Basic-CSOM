@@ -184,7 +184,7 @@ namespace Basic_CSOM.Entities.Lists
 
             targetContentType.FieldLinks.Add(fldLink);
             targetContentType.Update(false);
-
+            Context.Load(targetContentType);
             Context.ExecuteQuery();
         }
     }

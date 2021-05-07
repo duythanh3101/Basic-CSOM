@@ -68,7 +68,7 @@ namespace Basic_CSOM.Services
             return siteUrl;
         }
 
-        public Web CreateHRSubsite()
+        public void CreateHRSubsite()
         {
             try
             {
@@ -88,12 +88,10 @@ namespace Basic_CSOM.Services
                 Web web = tenantContext.Site.RootWeb.Webs.Add(webCreationInfo);
                 tenantContext.Load(web);
                 tenantContext.ExecuteQuery();
-                return web;
             }
             catch (Exception)
             {
             }
-            return null;
         }
     }
 }
