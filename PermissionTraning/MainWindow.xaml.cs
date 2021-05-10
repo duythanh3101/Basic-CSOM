@@ -92,7 +92,7 @@ namespace PermissionTraning
 
             Web web = context.Web;
 
-            context.Load(web, a => a.SiteUsers);
+            //context.Load(web, a => a.SiteUsers);
             context.ExecuteQuery();
 
             // Change permission
@@ -101,9 +101,9 @@ namespace PermissionTraning
             var designRole = new RoleDefinitionBindingCollection(context);
             designRole.Add(context.Web.RoleDefinitions.GetByType(RoleType.WebDesigner));
 
-            RoleAssignment newRoleAssignment = oList.RoleAssignments.Add(user, designRole);
+            oList.RoleAssignments.Add(user, designRole);
 
-            context.Load(newRoleAssignment);
+            //context.Load(newRoleAssignment);
             context.ExecuteQuery();
 
             return true;
@@ -117,11 +117,21 @@ namespace PermissionTraning
             context.ExecuteQuery();
         }
 
+        /// <summary>
+        /// 3-1
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AssignPermission_Click(object sender, RoutedEventArgs e)
         {
             AssignPermssionDesigner(listName, userAn);
         }
 
+        /// <summary>
+        /// 3-2
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DeletePermission_Click(object sender, RoutedEventArgs e)
         {
             DeleteUniquePermissions(listName, userAn);
@@ -169,19 +179,16 @@ namespace PermissionTraning
             groupCreationInfo.Title = groupName;
             groupCreationInfo.Description = "Custom Group Created...";
             User owner = web.EnsureUser(user);
+            User member = web.EnsureUser(userAn);
             Group group = web.SiteGroups.Add(groupCreationInfo);
             group.Owner = owner;
+            group.Users.AddUser(member);
             group.Update();
             context.ExecuteQuery();
 
             var roleDefinitions = web.RoleDefinitions;
 
-            // Get Owners Group and Remove the Permission Levels
-            var ownersGroupRoleAssignment = web.RoleAssignments.GetByPrincipal(context.Web.AssociatedOwnerGroup);
-            context.Load(ownersGroupRoleAssignment);
-            context.ExecuteQuery();
-
-            // Get Full Control Role Definition
+            // Get test level Role Definition
             var permissionLevel = roleDefinitions.GetByName(testlevel);
             context.Load(permissionLevel);
             context.ExecuteQuery();
@@ -192,15 +199,24 @@ namespace PermissionTraning
             // Bind the Newly Created Permission Level to Owners Group
             web.RoleAssignments.Add(group, collRDB);
 
-            context.Load(ownersGroupRoleAssignment);
             context.ExecuteQuery();
         }
 
+        /// <summary>
+        /// 4-2
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CreatePermission_Click(object sender, RoutedEventArgs e)
         {
             CreateCustomPermissionLevel(testlevel);
         }
 
+        /// <summary>
+        /// 4-4
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CreateGroup_Click(object sender, RoutedEventArgs e)
         {
             CreateCustomGroup(testgroup);
