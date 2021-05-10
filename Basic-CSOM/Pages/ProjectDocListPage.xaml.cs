@@ -52,7 +52,7 @@ namespace Basic_CSOM.Pages
             //{
 
             //}
-            //Seeding();
+            Seeding();
             //Update();
         }
 

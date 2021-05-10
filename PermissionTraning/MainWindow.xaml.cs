@@ -17,6 +17,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ListItem = Microsoft.SharePoint.Client.ListItem;
 using ListSP = Microsoft.SharePoint.Client.List;
 
 namespace PermissionTraning
@@ -30,6 +31,7 @@ namespace PermissionTraning
         string url = "https://m365b326364.sharepoint.com/sites/csom-training/finance";
         string user = "admin@m365b326364.onmicrosoft.com";
         string userAn = "anhoang@m365b326364.onmicrosoft.com";
+        string listName = "Accounts";
         SecureString password = UtilApp.GetSecureString("Fgakdhsj123");
         private ClientContext context;
 
@@ -49,7 +51,8 @@ namespace PermissionTraning
                 context.Load(web, w => w.Title, w => w.Description);
             }
 
-            GetListPermission();
+            //GetListPermission();
+           
         }
 
         private void GetListPermission()
@@ -62,7 +65,7 @@ namespace PermissionTraning
                                                                                    roleAsg => roleAsg.RoleDefinitionBindings.Include(roleDef => roleDef.Name));
             Dictionary<string, string> permission = UtilCommon.GetPermissionDetails(context, queryForList);
 
-            AssignPermssionDesigner("AAA",userAn);
+            AssignPermssionDesigner("Accounts",userAn);
         }
 
         private void ResetRole(ListCollection lists)
@@ -89,11 +92,15 @@ namespace PermissionTraning
             }
             // get list 
             var oList = context.Web.Lists.GetByTitle(listTitle);
-            //ResetRole(oList);
+
+            // break role permission
+            oList.BreakRoleInheritance(false, true);
+
             Web web = context.Web;
           
             context.Load(web, a => a.SiteUsers);
             context.ExecuteQuery();
+
             // Change permission
             Principal user = web.SiteUsers.GetByEmail(accountAdd);
 
@@ -108,5 +115,22 @@ namespace PermissionTraning
             return true;
         }
 
+        private void DeleteUniquePermissions(string listTitle, string accountAdd)
+        {
+            var list = context.Web.Lists.GetByTitle(listTitle);
+            list.ResetRoleInheritance();
+
+            context.ExecuteQuery();
+        }
+
+        private void AssignPermission_Click(object sender, RoutedEventArgs e)
+        {
+            AssignPermssionDesigner(listName, userAn);
+        }
+
+        private void DeletePermission_Click(object sender, RoutedEventArgs e)
+        {
+            DeleteUniquePermissions(listName, userAn);
+        }
     }
 }

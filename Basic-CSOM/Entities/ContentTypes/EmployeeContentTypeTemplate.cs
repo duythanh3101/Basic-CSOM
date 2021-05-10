@@ -18,6 +18,12 @@ namespace Basic_CSOM.Entities.ContentTypes
             Fields = new List<BaseField>()
             {
                 new ExistSiteColumn(context) { InternalName = "FirstName" },
+                 new NewSiteColumn(context)
+                {
+                    InternalName = ScreenConstants.EmailAdd,
+                    DisplayName = "Last Name",
+                    SchemaXml = $"<Field ID='{Guid.NewGuid()}' Type='Text' Name='LastName' StaticName='LastName' DisplayName='Last Name' />"
+                },
                 new NewSiteColumn(context)
                 {
                     InternalName = ScreenConstants.EmailAdd,

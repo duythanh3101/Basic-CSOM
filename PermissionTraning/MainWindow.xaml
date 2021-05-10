@@ -7,6 +7,9 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        
+        <StackPanel Orientation="Horizontal">
+            <Button Content="Assign permission" Click="AssignPermission_Click" Height="30" Margin="10"/>
+            <Button Content="Delete permission" Click="DeletePermission_Click" Height="30" Margin="10"/>
+        </StackPanel>
     </Grid>
 </Window>

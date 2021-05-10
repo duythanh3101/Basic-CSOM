@@ -23,7 +23,7 @@ namespace Basic_CSOM.Services
 
         public void AddPublishingPage()
         {
-            string pageName = "CustomPage2.aspx";
+            string pageName = "CustomPage3.aspx";
             Web webSite = context.Web;
             context.Load(webSite);
             PublishingWeb web = PublishingWeb.GetPublishingWeb(context, webSite);

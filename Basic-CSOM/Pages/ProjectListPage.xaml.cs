@@ -136,7 +136,7 @@ namespace Basic_CSOM.Pages
 
                     // Leader
                     FieldLookupValue lookup = new FieldLookupValue();
-                    lookup.LookupId = 2;
+                    lookup.LookupId = 3;
                     listItem["Leader"] = lookup;
 
                     // Members
@@ -252,10 +252,11 @@ namespace Basic_CSOM.Pages
             // Members
             List<FieldLookupValue> lvList = new List<FieldLookupValue>();
             lvList.Add(lv);
-            lvList.Add(new FieldLookupValue() { LookupId = 2 });
+            lvList.Add(new FieldLookupValue() { LookupId = 3 });
             newItem1["Member"] = lvList;
             newItem1.Update();
             context.ExecuteQuery();
+
 
             //Add Data. 
             ListItem newItem2 = oList.AddItem(new ListItemCreationInformation());
