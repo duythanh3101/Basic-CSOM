@@ -10,6 +10,8 @@
         <StackPanel Orientation="Horizontal">
             <Button Content="Assign permission" Click="AssignPermission_Click" Height="30" Margin="10"/>
             <Button Content="Delete permission" Click="DeletePermission_Click" Height="30" Margin="10"/>
+            <Button Content="Create permission level" Click="CreatePermission_Click" Height="30" Margin="10"/>
+            <Button Content="Create group" Click="CreateGroup_Click" Height="30" Margin="10"/>
         </StackPanel>
     </Grid>
 </Window>

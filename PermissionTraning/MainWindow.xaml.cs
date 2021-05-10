@@ -28,10 +28,13 @@ namespace PermissionTraning
     public partial class MainWindow : Window
     {
 
+        string rootUrl = "https://m365b326364.sharepoint.com/sites/csom-training";
         string url = "https://m365b326364.sharepoint.com/sites/csom-training/finance";
         string user = "admin@m365b326364.onmicrosoft.com";
         string userAn = "anhoang@m365b326364.onmicrosoft.com";
         string listName = "Accounts";
+        string testlevel = "Test Level";
+        string testgroup = "Test Group";
         SecureString password = UtilApp.GetSecureString("Fgakdhsj123");
         private ClientContext context;
 
@@ -52,7 +55,7 @@ namespace PermissionTraning
             }
 
             //GetListPermission();
-           
+
         }
 
         private void GetListPermission()
@@ -75,7 +78,7 @@ namespace PermissionTraning
             context.ExecuteQuery();
         }
 
-        private bool AssignPermssionDesigner(string listTitle, string accountAdd)
+        private bool AssignPermssionDesigner(string listTitle, string accountAdd, List<RoleType> list = null)
         {
             if (!UtilApp.IsExist(context, listTitle, Basic_CSOM.Enums.TypeSharepointEnum.List))
             {
@@ -88,7 +91,7 @@ namespace PermissionTraning
             oList.BreakRoleInheritance(false, true);
 
             Web web = context.Web;
-          
+
             context.Load(web, a => a.SiteUsers);
             context.ExecuteQuery();
 
@@ -97,7 +100,7 @@ namespace PermissionTraning
 
             var designRole = new RoleDefinitionBindingCollection(context);
             designRole.Add(context.Web.RoleDefinitions.GetByType(RoleType.WebDesigner));
-        
+
             RoleAssignment newRoleAssignment = oList.RoleAssignments.Add(user, designRole);
 
             context.Load(newRoleAssignment);
@@ -122,6 +125,93 @@ namespace PermissionTraning
         private void DeletePermission_Click(object sender, RoutedEventArgs e)
         {
             DeleteUniquePermissions(listName, userAn);
+        }
+
+        private void CreateTestLevelPermission()
+        {
+            List<RoleType> permissions = new List<RoleType>()
+            {
+
+            };
+        }
+
+        public void CreateCustomPermissionLevel(string permissionName)
+        {
+            try
+            {
+                context = AuthenticationManager.CreateClientContext(rootUrl, user, password);
+                var web = context.Web;
+                context.Load(web, w => w.Title, w => w.Description);
+
+
+                // Set up permissions.
+                BasePermissions permissions = new BasePermissions();
+                permissions.Set(PermissionKind.ManageLists);
+                permissions.Set(PermissionKind.CreateAlerts);
+                permissions.Set(PermissionKind.ViewListItems);
+
+                // create
+                RoleDefinitionCreationInformation roleDefinitionCreationInformation = new RoleDefinitionCreationInformation();
+                roleDefinitionCreationInformation.BasePermissions = permissions;
+                roleDefinitionCreationInformation.Name = permissionName;
+                roleDefinitionCreationInformation.Description = "Custom Permission Level";
+                context.Web.RoleDefinitions.Add(roleDefinitionCreationInformation);
+
+                //context.Load(roleDefinitionCreationInformation);
+                context.ExecuteQuery();
+            }
+            catch (Exception)
+            {
+
+            }
+        }
+
+        public void CreateCustomGroup(string groupName)
+        {
+            context = AuthenticationManager.CreateClientContext(rootUrl, user, password);
+            var web = context.Web;
+            context.Load(web.RoleDefinitions);
+            context.Load(web, w => w.Title, w => w.Description);
+
+            GroupCreationInformation groupCreationInfo = new GroupCreationInformation();
+            groupCreationInfo.Title = groupName;
+            groupCreationInfo.Description = "Custom Group Created...";
+            User owner = web.EnsureUser(user);
+            Group group = web.SiteGroups.Add(groupCreationInfo);
+            group.Owner = owner;
+            group.Update();
+            context.ExecuteQuery();
+
+            var roleDefinitions = web.RoleDefinitions;
+
+            // Get Owners Group and Remove the Permission Levels
+            var ownersGroupRoleAssignment = web.RoleAssignments.GetByPrincipal(context.Web.AssociatedOwnerGroup);
+            context.Load(ownersGroupRoleAssignment);
+            context.ExecuteQuery();
+
+            // Get Full Control Role Definition
+            var permissionLevel = roleDefinitions.GetByName(testlevel);
+            context.Load(permissionLevel);
+            context.ExecuteQuery();
+
+            RoleDefinitionBindingCollection collRDB = new RoleDefinitionBindingCollection(context);
+            collRDB.Add(permissionLevel);
+
+            // Bind the Newly Created Permission Level to Owners Group
+            web.RoleAssignments.Add(group, collRDB);
+
+            context.Load(ownersGroupRoleAssignment);
+            context.ExecuteQuery();
+        }
+
+        private void CreatePermission_Click(object sender, RoutedEventArgs e)
+        {
+            CreateCustomPermissionLevel(testlevel);
+        }
+
+        private void CreateGroup_Click(object sender, RoutedEventArgs e)
+        {
+            CreateCustomGroup(testgroup);
         }
     }
 }
