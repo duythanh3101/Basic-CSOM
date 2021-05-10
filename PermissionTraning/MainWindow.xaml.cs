@@ -57,15 +57,13 @@ namespace PermissionTraning
 
         private void GetListPermission()
         {
-            ListSP list = context.Web.Lists.GetByTitle("Accounts");
+            ListSP list = context.Web.Lists.GetByTitle(listName);
             context.Load(list, a => a.RoleAssignments);
             context.ExecuteQuery();
 
             IQueryable<RoleAssignment> queryForList = list.RoleAssignments.Include(roleAsg => roleAsg.Member,
                                                                                    roleAsg => roleAsg.RoleDefinitionBindings.Include(roleDef => roleDef.Name));
             Dictionary<string, string> permission = UtilCommon.GetPermissionDetails(context, queryForList);
-
-            AssignPermssionDesigner("Accounts",userAn);
         }
 
         private void ResetRole(ListCollection lists)
@@ -75,13 +73,6 @@ namespace PermissionTraning
                 item.BreakRoleInheritance(false, true);
             }
             context.ExecuteQuery();
-
-            //var role = new RoleDefinitionBindingCollection(context);
-            //role.Add(web.RoleDefinitions.GetByType(RoleType.WebDesigner));
-            //User user = web.EnsureUser("contoso\\adamb");
-            //newFolder.ListItemAllFields.RoleAssignments.Add(user, role);
-            //newFolder.Update();
-            //clientContext.ExecuteQuery();
         }
 
         private bool AssignPermssionDesigner(string listTitle, string accountAdd)
