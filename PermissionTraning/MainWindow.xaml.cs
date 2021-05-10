@@ -78,7 +78,7 @@ namespace PermissionTraning
             context.ExecuteQuery();
         }
 
-        private bool AssignPermssionDesigner(string listTitle, string accountAdd, List<RoleType> list = null)
+        private bool AssignPermssionDesigner(string listTitle, string accountAdd)
         {
             if (!UtilApp.IsExist(context, listTitle, Basic_CSOM.Enums.TypeSharepointEnum.List))
             {
@@ -125,14 +125,6 @@ namespace PermissionTraning
         private void DeletePermission_Click(object sender, RoutedEventArgs e)
         {
             DeleteUniquePermissions(listName, userAn);
-        }
-
-        private void CreateTestLevelPermission()
-        {
-            List<RoleType> permissions = new List<RoleType>()
-            {
-
-            };
         }
 
         public void CreateCustomPermissionLevel(string permissionName)
