@@ -4,9 +4,54 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UserProfile"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        mc:Ignorable="d" WindowStartupLocation="CenterScreen"
+        Title="MainWindow" Height="600" Width="1100">
     <Grid>
-        
+        <StackPanel Orientation="Vertical">
+            <Label Content="User Profile List" HorizontalAlignment="Center" FontSize="30" FontWeight="Bold" Foreground="Red"/>
+            <DataGrid x:Name="UserProfileGrid" Height="400"
+                          CanUserReorderColumns="False"
+                          AutoGenerateColumns="False"
+                          CanUserAddRows="True"
+                          VerticalScrollBarVisibility="Auto"
+                          Margin="20 10 20 10"  AlternationCount="1000"
+                          >
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="STT" Width="50" Binding="{Binding AlternationIndex, RelativeSource={RelativeSource AncestorType=DataGridRow}}"/>
+                    <DataGridTextColumn Header="User Name" Width="200" Binding="{Binding UserName}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="First Name" Width="200" Binding="{Binding FirstName}" IsReadOnly="False"/>
+                    <DataGridTextColumn Header="Last Name" Width="200" Binding="{Binding LastName}" IsReadOnly="False"/>
+                    <DataGridTextColumn Header="Department" Width="100" Binding="{Binding Department}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Work Phone" Width="100" Binding="{Binding WorkPhone}" IsReadOnly="False"/>
+                   
+                    <!--<DataGridTemplateColumn Header="LanguageName" Width="100">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <ComboBox ItemsSource="{Binding Languages}">
+                                    <ComboBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <CheckBox Content="{Binding LanguageName}" IsChecked="{Binding IsChecked}"/>
+                                        </DataTemplate>
+                                    </ComboBox.ItemTemplate>
+                                </ComboBox>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>-->
+                    <DataGridTemplateColumn Header="Edit" Width="100">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button
+                                         Background="Red"
+                                         Width="60"
+                                    Click="Edit_Clicked"
+                                        >Save</Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+               
+                </DataGrid.Columns>
+            </DataGrid>
+        </StackPanel>
+
     </Grid>
 </Window>
