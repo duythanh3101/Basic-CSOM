@@ -90,8 +90,6 @@ namespace UserProfile
                     {
                         case MessageBoxResult.Yes:
                             Edit(us);
-                            // Refresh the values.
-                            RefreshUIValues();
                             MessageBox.Show("Save successfully");
                             break;
                         case MessageBoxResult.Cancel:
@@ -121,11 +119,6 @@ namespace UserProfile
                     context.ExecuteQuery();
                 }
             }
-        }
-
-        private void RefreshUIValues()
-        {
-
         }
     }
 }
