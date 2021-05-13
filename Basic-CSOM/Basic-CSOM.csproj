@@ -102,6 +102,7 @@
     <Compile Include="Entities\ContentTypes\EmployeeContentTypeTemplate.cs" />
     <Compile Include="Entities\ContentTypes\ProjectContentTypeTemplate.cs" />
     <Compile Include="Entities\ContentTypes\ProjectDocumentContentTypeTemplate.cs" />
+    <Compile Include="Entities\Terms\TermHandler.cs" />
     <Compile Include="Enums\LanguageEnum.cs" />
     <Compile Include="Enums\StateEnum.cs" />
     <Compile Include="Entities\Fields\BaseField.cs" />

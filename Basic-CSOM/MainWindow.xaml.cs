@@ -11,6 +11,7 @@ using Basic_CSOM.Entities.Lists;
 using System.Collections.Generic;
 using Basic_CSOM.Services;
 using Basic_CSOM.Pages;
+using Basic_CSOM.Entities.Terms;
 
 namespace Basic_CSOM
 {
@@ -80,6 +81,13 @@ namespace Basic_CSOM
 
             PageHandler pageHandler = new PageHandler(context);
             pageHandler.AddPublishingPage();
+        }
+
+        private void CreateTerm_Clicked(object sender, RoutedEventArgs e)
+        {
+            var termHandler = new TermHandler(context);
+            termHandler.CreateDepartmentTermSet();
+            MessageBox.Show("Create Success");
         }
     }
 }

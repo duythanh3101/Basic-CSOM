@@ -1,5 +1,6 @@
 ﻿using Basic_CSOM.Utils;
 using Microsoft.SharePoint.Client;
+using Microsoft.SharePoint.Client.Taxonomy;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -204,6 +205,23 @@ namespace Basic_CSOM.Entities.Lists
             targetContentType.Update(false);
             Context.Load(targetContentType);
             Context.ExecuteQuery();
+        }
+
+        protected void GetTaxonomyFieldInfo(string ternSetName, out Guid termStoreId, out Guid termSetId)
+        {
+            termStoreId = Guid.Empty;
+            termSetId = Guid.Empty;
+
+            TaxonomySession session = TaxonomySession.GetTaxonomySession(Context);
+            TermStore termStore = session.GetDefaultSiteCollectionTermStore();
+            TermSetCollection termSets = termStore.GetTermSetsByName(ternSetName, 1033);
+
+            Context.Load(termSets, tsc => tsc.Include(ts => ts.Id));
+            Context.Load(termStore, ts => ts.Id);
+            Context.ExecuteQuery();
+
+            termStoreId = termStore.Id;
+            termSetId = termSets.FirstOrDefault().Id;
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Basic_CSOM.Utils;
 using Microsoft.SharePoint.Client;
+using Microsoft.SharePoint.Client.Taxonomy;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +25,8 @@ namespace Basic_CSOM.Entities.Lists
                 "Description",
                 "State",
                 "StartDate",
-                "_EndDate"
+                "_EndDate",
+                "DemoNewState"
             };
 
         }
@@ -55,10 +57,30 @@ namespace Basic_CSOM.Entities.Lists
             context.Load(memberField);
             UpdateFieldToContentType(contentType, memberField, "Member");
 
+            // Add metadata field
+            // Create as a regular field setting the desired type in XML
+            string metatSchema = $"<Field DisplayName='New State' Name='DemoNewState' ID='{Guid.NewGuid()}' ShowField='Title' Type='TaxonomyFieldTypeMulti' />";
+            Field field = list.Fields.AddFieldAsXml(metatSchema, false, AddFieldOptions.AddFieldInternalNameHint);
+            context.ExecuteQuery();
+
+            Guid termStoreId = Guid.Empty;
+            Guid termSetId = Guid.Empty;
+            GetTaxonomyFieldInfo("DepartmentSet", out termStoreId, out termSetId);
+
+            // Retrieve as Taxonomy Field
+            TaxonomyField taxonomyField = context.CastTo<TaxonomyField>(field);
+            taxonomyField.SspId = termStoreId;
+            taxonomyField.TermSetId = termSetId;
+            taxonomyField.TargetTemplate = String.Empty;
+            taxonomyField.AnchorId = Guid.Empty;
+            taxonomyField.Update();
+            UpdateFieldToContentType(contentType, memberField, "DepartmentTest");
+
             list.Update();
 
           
         }
+
 
     }
 }
