@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Basic_CSOM"
         mc:Ignorable="d" WindowStartupLocation="CenterScreen"
-        Title="MainWindow" Height="600" Width="1350">
+        Title="MainWindow" Height="600" Width="1350" WindowState="Maximized">
     <Window.Resources>
         <Style TargetType="Button">
             <Setter Property="Background" Value="MediumVioletRed"/>
@@ -33,6 +33,7 @@
                 <Button x:Name="ProjectDocListButton" Content="Project Doc List" Click="ProjectDocListButton_Clicked"/>
                 <Button x:Name="CreatePage" Content="Create page" Click="CreatePage_Clicked"/>
                 <Button x:Name="CreateTerm" Content="Create term" Click="CreateTerm_Clicked"/>
+                <Button x:Name="SearchButton" Content="Search" Click="Search_Clicked"/>
             </StackPanel>
             <Border BorderBrush="Black" BorderThickness="0 0 0 1"/>
             <Frame Name="MainFrame"/>

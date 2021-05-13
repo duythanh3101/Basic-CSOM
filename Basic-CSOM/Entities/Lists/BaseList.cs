@@ -1,5 +1,6 @@
 ﻿using Basic_CSOM.Utils;
 using Microsoft.SharePoint.Client;
+using Microsoft.SharePoint.Client.Search.Query;
 using Microsoft.SharePoint.Client.Taxonomy;
 using System;
 using System.Collections.Generic;
@@ -223,5 +224,6 @@ namespace Basic_CSOM.Entities.Lists
             termStoreId = termStore.Id;
             termSetId = termSets.FirstOrDefault().Id;
         }
+
     }
 }

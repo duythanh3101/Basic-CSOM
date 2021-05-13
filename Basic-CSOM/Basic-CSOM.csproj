@@ -102,7 +102,12 @@
     <Compile Include="Entities\ContentTypes\EmployeeContentTypeTemplate.cs" />
     <Compile Include="Entities\ContentTypes\ProjectContentTypeTemplate.cs" />
     <Compile Include="Entities\ContentTypes\ProjectDocumentContentTypeTemplate.cs" />
-    <Compile Include="Entities\Terms\TermHandler.cs" />
+    <Compile Include="Entities\Models\SearchResultItem.cs" />
+    <Compile Include="Pages\SearchListPage.xaml.cs">
+      <DependentUpon>SearchListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Services\SearchHandler.cs" />
+    <Compile Include="Services\TermHandler.cs" />
     <Compile Include="Enums\LanguageEnum.cs" />
     <Compile Include="Enums\StateEnum.cs" />
     <Compile Include="Entities\Fields\BaseField.cs" />
@@ -164,6 +169,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\ProjectListPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\SearchListPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

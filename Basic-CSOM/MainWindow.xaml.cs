@@ -20,7 +20,7 @@ namespace Basic_CSOM
     /// </summary>
     public partial class MainWindow : Window
     {
-        string url = "https://m365b326364.sharepoint.com/sites/tiger";
+        string url = "https://m365b326364.sharepoint.com/sites/training-sharepoint";
         string user = "admin@m365b326364.onmicrosoft.com";
         SecureString password = UtilApp.GetSecureString("Fgakdhsj123");
         private ClientContext context;
@@ -88,6 +88,11 @@ namespace Basic_CSOM
             var termHandler = new TermHandler(context);
             termHandler.CreateDepartmentTermSet();
             MessageBox.Show("Create Success");
+        }
+
+        private void Search_Clicked(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Content = new SearchListPage(context);
         }
     }
 }
