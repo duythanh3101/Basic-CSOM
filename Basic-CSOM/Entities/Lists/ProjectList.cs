@@ -74,7 +74,7 @@ namespace Basic_CSOM.Entities.Lists
             taxonomyField.TargetTemplate = String.Empty;
             taxonomyField.AnchorId = Guid.Empty;
             taxonomyField.Update();
-            UpdateFieldToContentType(contentType, memberField, "DepartmentTest");
+            UpdateFieldToContentType(contentType, taxonomyField, "DepartmentTest");
 
             list.Update();
 
